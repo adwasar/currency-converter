@@ -15,8 +15,12 @@ export default function RootLayout() {
           shadowRadius: 8,
           elevation: 4,
         },
+        headerTitleStyle: {
+          fontFamily: 'SangBleuSans-Medium'
+        },
         tabBarLabelStyle: {
           fontSize: 12,
+          fontFamily: 'SangBleuSans-Medium'
         },
       }}
     >
