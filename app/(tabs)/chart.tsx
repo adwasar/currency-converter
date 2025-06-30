@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 export default function Chart() {
   return (
     <View style={styles.container}>
-      <Text>Chart</Text>
+      <Text></Text>
     </View>
   )
 }
