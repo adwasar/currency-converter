@@ -9,18 +9,26 @@ export default function RootLayout() {
         tabBarInactiveTintColor: '#4E4E4E',
         tabBarStyle: {
           backgroundColor: '#F6F6F6',
-          shadowColor: '#000',
           shadowOffset: { width: 0, height: -2 },
           shadowOpacity: 0.15,
           shadowRadius: 8,
           elevation: 4,
         },
-        headerTitleStyle: {
-          fontFamily: 'SangBleuSans-Medium'
+        headerStyle: {
+          backgroundColor: '#F6F6F6',
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.15,
+          shadowRadius: 8,
         },
+        headerTitleStyle: {
+          fontFamily: 'SangBleuSans-Medium',
+          fontSize: 16,
+        },
+        headerTitleAlign: 'left',
+        headerTintColor: '#141414',
         tabBarLabelStyle: {
           fontSize: 12,
-          fontFamily: 'SangBleuSans-Medium'
+          fontFamily: 'SangBleuSans-Medium',
         },
       }}
     >
@@ -28,6 +36,7 @@ export default function RootLayout() {
         name="index"
         options={{
           title: 'Home',
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image
               source={
@@ -59,7 +68,7 @@ export default function RootLayout() {
       <Tabs.Screen
         name="setting"
         options={{
-          title: 'Setting',
+          title: 'Settings',
           tabBarIcon: ({ focused }) => (
             <Image
               source={
