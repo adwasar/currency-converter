@@ -14,6 +14,10 @@ export default function RootLayout() {
           shadowRadius: 8,
           elevation: 4,
         },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontFamily: 'SangBleuSans-Medium',
+        },
         headerStyle: {
           backgroundColor: '#F6F6F6',
           shadowOffset: { width: 0, height: -2 },
@@ -26,10 +30,6 @@ export default function RootLayout() {
         },
         headerTitleAlign: 'left',
         headerTintColor: '#141414',
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontFamily: 'SangBleuSans-Medium',
-        },
       }}
     >
       <Tabs.Screen
