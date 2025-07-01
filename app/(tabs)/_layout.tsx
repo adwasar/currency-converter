@@ -5,24 +5,9 @@ export default function RootLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#26278D',
-        tabBarInactiveTintColor: '#4E4E4E',
-        tabBarStyle: {
-          backgroundColor: '#F6F6F6',
-          shadowOffset: { width: 0, height: -2 },
-          shadowOpacity: 0.15,
-          shadowRadius: 8,
-          elevation: 4,
-        },
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontFamily: 'SangBleuSans-Medium',
-        },
         headerStyle: {
           backgroundColor: '#F6F6F6',
-          shadowOffset: { width: 0, height: -2 },
-          shadowOpacity: 0.15,
-          shadowRadius: 8,
+          boxShadow: '0px 1px 4px 0px rgba(0, 0, 0, 0.25)',
         },
         headerTitleStyle: {
           fontFamily: 'SangBleuSans-Medium',
@@ -30,6 +15,16 @@ export default function RootLayout() {
         },
         headerTitleAlign: 'left',
         headerTintColor: '#141414',
+        tabBarActiveTintColor: '#26278D',
+        tabBarInactiveTintColor: '#4E4E4E',
+        tabBarStyle: {
+          backgroundColor: '#F6F6F6',
+          boxShadow: '0px -2px 8px 0px rgba(0, 0, 0, 0.15)',
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontFamily: 'SangBleuSans-Medium',
+        },
       }}
     >
       <Tabs.Screen
