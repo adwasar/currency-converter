@@ -1,19 +1,15 @@
 import { StyleSheet, View, Pressable } from 'react-native'
+import { useRef } from 'react'
+import BottomSheet from '@gorhom/bottom-sheet'
 
 import AppText from '@/components/AppText'
 import CurrencyPicker from '@/components/CurrencyPicker'
-import { useState } from 'react'
 
 export default function Index() {
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const bottomSheetRef = useRef<BottomSheet>(null)
 
-  const openModal = () => {
-    setModalIsOpen(true)
-  }
-
-  const closeModal = () => {
-    setModalIsOpen(false)
-  }
+  const handleCloseCurrencyPicker = () => bottomSheetRef.current?.close()
+  const handleOpenCurrencyPicker = () => bottomSheetRef.current?.expand()
 
   return (
     <View style={styles.container}>
@@ -23,14 +19,16 @@ export default function Index() {
           Check live rates, set rate alerts, receive notifications and more.
         </AppText>
       </View>
-      <View style={styles.mainContainer}>
-      </View>
+      <View style={styles.mainContainer}></View>
       <View style={styles.footerContainer}>
-        <Pressable style={styles.button} onPress={openModal}>
+        <Pressable style={styles.button} onPress={handleOpenCurrencyPicker}>
           <AppText style={styles.buttonText}>Open modal</AppText>
         </Pressable>
       </View>
-      <CurrencyPicker modalIsOpen={modalIsOpen} closeModal={closeModal} />
+      <CurrencyPicker
+        closeModal={handleCloseCurrencyPicker}
+        bottomSheetRef={bottomSheetRef}
+      />
     </View>
   )
 }
@@ -73,7 +71,6 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   button: {
     width: '100%',
