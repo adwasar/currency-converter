@@ -1,22 +1,27 @@
-import { StyleSheet, Pressable, Text, View } from 'react-native'
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet'
+import { StyleSheet, Pressable, View } from 'react-native'
 import { Image } from 'expo-image'
+import BottomSheet from '@gorhom/bottom-sheet'
 
+import CurrencyList from './CurrencyList'
 
 const closeBtnIcon = require('@/assets/images/close-btn.svg')
 
 interface Props {
   closeModal: () => void
   bottomSheetRef: React.RefObject<BottomSheet | null>
+  currencySelected: string | null
+  setCurrencySelected: (currency: string | null) => void
 }
 
-export default function CurrencyPicker({ closeModal, bottomSheetRef }: Props) {
+export default function CurrencyPicker({ closeModal, bottomSheetRef, currencySelected, setCurrencySelected }: Props) {
   return (
     <BottomSheet
       style={styles.container}
       ref={bottomSheetRef}
-      enablePanDownToClose
+      snapPoints={['35%', '70%']}
+      maxDynamicContentSize={0}
       index={-1}
+      enableContentPanningGesture={false}
       handleComponent={() => (
         <View style={styles.handlerContainer}>
           <View style={styles.handlerIndicator} />
@@ -26,9 +31,7 @@ export default function CurrencyPicker({ closeModal, bottomSheetRef }: Props) {
         </View>
       )}
     >
-      <BottomSheetView style={styles.contentContainer}>
-        <Text>Awesome 🎉</Text>
-      </BottomSheetView>
+      <CurrencyList currencySelected={currencySelected} setCurrencySelected={setCurrencySelected} />
     </BottomSheet>
   )
 }
@@ -45,14 +48,9 @@ const styles = StyleSheet.create({
     shadowRadius: 13.84,
     elevation: 5,
   },
-  contentContainer: {
-    flex: 1,
-    padding: 36,
-    alignItems: 'center',
-  },
   handlerContainer: {
     alignItems: 'center',
-    paddingTop: 10,
+    paddingVertical: 10,
   },
   handlerIndicator: {
     width: 44,

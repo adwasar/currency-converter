@@ -1,15 +1,17 @@
 import { StyleSheet, View, Pressable } from 'react-native'
-import { useRef } from 'react'
+import { useState, useRef } from 'react'
 import BottomSheet from '@gorhom/bottom-sheet'
 
 import AppText from '@/components/AppText'
 import CurrencyPicker from '@/components/CurrencyPicker'
 
 export default function Index() {
+  const [currencySelected, setCurrencySelected] = useState<string | null>('AED')
+
   const bottomSheetRef = useRef<BottomSheet>(null)
 
   const handleCloseCurrencyPicker = () => bottomSheetRef.current?.close()
-  const handleOpenCurrencyPicker = () => bottomSheetRef.current?.expand()
+  const handleOpenCurrencyPicker = () => bottomSheetRef.current?.snapToIndex(1)
 
   return (
     <View style={styles.container}>
@@ -28,6 +30,8 @@ export default function Index() {
       <CurrencyPicker
         closeModal={handleCloseCurrencyPicker}
         bottomSheetRef={bottomSheetRef}
+        currencySelected={currencySelected}
+        setCurrencySelected={setCurrencySelected}
       />
     </View>
   )
