@@ -11,7 +11,8 @@ export default function Index() {
   const bottomSheetRef = useRef<BottomSheet>(null)
 
   const handleCloseCurrencyPicker = () => bottomSheetRef.current?.close()
-  const handleOpenCurrencyPicker = () => bottomSheetRef.current?.snapToIndex(1)
+  const handleOpenCurrencyPicker = () => bottomSheetRef.current?.snapToIndex(2)
+  const handlePressBottomSheetSearchInput = () => bottomSheetRef.current?.snapToIndex(2)
 
   return (
     <View style={styles.container}>
@@ -32,6 +33,7 @@ export default function Index() {
         bottomSheetRef={bottomSheetRef}
         currencySelected={currencySelected}
         setCurrencySelected={setCurrencySelected}
+        handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput}
       />
     </View>
   )

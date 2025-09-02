@@ -3,6 +3,7 @@ import { Image } from 'expo-image'
 import BottomSheet from '@gorhom/bottom-sheet'
 
 import CurrencyList from './CurrencyList'
+import BottomSheetSearchInput from './BottomSheetSearchInput'
 
 const closeBtnIcon = require('@/assets/images/close-btn.svg')
 
@@ -11,9 +12,10 @@ interface Props {
   bottomSheetRef: React.RefObject<BottomSheet | null>
   currencySelected: string | null
   setCurrencySelected: (currency: string | null) => void
+  handlePressBottomSheetSearchInput: () => void
 }
 
-export default function CurrencyPicker({ closeModal, bottomSheetRef, currencySelected, setCurrencySelected }: Props) {
+export default function CurrencyPicker({ closeModal, bottomSheetRef, currencySelected, setCurrencySelected, handlePressBottomSheetSearchInput }: Props) {
   return (
     <BottomSheet
       style={styles.container}
@@ -25,6 +27,7 @@ export default function CurrencyPicker({ closeModal, bottomSheetRef, currencySel
       handleComponent={() => (
         <View style={styles.handlerContainer}>
           <View style={styles.handlerIndicator} />
+          <BottomSheetSearchInput handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput} />
           <Pressable style={styles.modalBtnClose} onPress={closeModal}>
             <Image style={styles.modalBtnCloseImage} source={closeBtnIcon} contentFit="cover" />
           </Pressable>

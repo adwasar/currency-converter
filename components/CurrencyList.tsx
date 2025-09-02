@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, Pressable } from 'react-native'
+import { StyleSheet, Pressable } from 'react-native'
 import { Image } from 'expo-image'
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet'
 
