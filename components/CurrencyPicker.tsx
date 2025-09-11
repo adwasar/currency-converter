@@ -27,13 +27,13 @@ export default function CurrencyPicker({ closeModal, bottomSheetRef, currencySel
       handleComponent={() => (
         <View style={styles.handlerContainer}>
           <View style={styles.handlerIndicator} />
-          <BottomSheetSearchInput handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput} />
           <Pressable style={styles.modalBtnClose} onPress={closeModal}>
             <Image style={styles.modalBtnCloseImage} source={closeBtnIcon} contentFit="cover" />
           </Pressable>
         </View>
       )}
-    >
+      >
+      <BottomSheetSearchInput handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput} />
       <CurrencyList currencySelected={currencySelected} setCurrencySelected={setCurrencySelected} />
     </BottomSheet>
   )

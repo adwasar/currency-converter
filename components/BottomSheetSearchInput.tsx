@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
+import { Image } from 'expo-image'
+
+const icon = require('@/assets/images/search-icon.svg')
 
 interface Props {
   handlePressBottomSheetSearchInput: () => void
@@ -10,24 +13,40 @@ export default function BottomSheetSearchInput({ handlePressBottomSheetSearchInp
 
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} onChangeText={onChangeText} onPress={handlePressBottomSheetSearchInput} value={text} placeholder="Search..." />
+      <Image style={styles.icon} source={icon} contentFit='cover' />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeText}
+        onPress={handlePressBottomSheetSearchInput}
+        value={text}
+        placeholder="Search..."
+      />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
     width: '100%',
     paddingHorizontal: 20,
+    marginTop: 32,
   },
   input: {
     height: 40,
-    marginTop: 52,
     padding: 10,
     paddingStart: 36,
     width: '100%',
     borderWidth: 1.5,
     borderColor: '#26278D',
     borderRadius: 5,
+  },
+  icon: {
+    position: "absolute",
+    left: 32,
+    top: '50%',
+    width: 16,
+    height: 16,
+    transform: [{ translateY: -8 }],
   },
 })
