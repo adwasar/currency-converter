@@ -2,7 +2,6 @@ import { Stack } from 'expo-router'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
-import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
@@ -29,13 +28,11 @@ export default function RootLayout() {
   // END Connecting fonts
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <GestureHandlerRootView>
-        <StatusBar style="dark" />
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }}></Stack.Screen>
-        </Stack>
-      </GestureHandlerRootView>
-    </TouchableWithoutFeedback>
+    <GestureHandlerRootView>
+      <StatusBar style="dark" />
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }}></Stack.Screen>
+      </Stack>
+    </GestureHandlerRootView>
   )
 }

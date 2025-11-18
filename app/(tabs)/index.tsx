@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable } from 'react-native'
+import { StyleSheet, View, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { useState, useRef } from 'react'
 import BottomSheet from '@gorhom/bottom-sheet'
 
@@ -15,27 +15,29 @@ export default function Index() {
   const handlePressBottomSheetSearchInput = () => bottomSheetRef.current?.snapToIndex(2)
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <AppText style={styles.headerTitle}>Currency Converter</AppText>
-        <AppText style={styles.headerSubTitle}>
-          Check live rates, set rate alerts, receive notifications and more.
-        </AppText>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <AppText style={styles.headerTitle}>Currency Converter</AppText>
+          <AppText style={styles.headerSubTitle}>
+            Check live rates, set rate alerts, receive notifications and more.
+          </AppText>
+        </View>
+        <View style={styles.mainContainer}></View>
+        <View style={styles.footerContainer}>
+          <Pressable style={styles.button} onPress={handleOpenCurrencyPicker}>
+            <AppText style={styles.buttonText}>Open modal</AppText>
+          </Pressable>
+        </View>
+        <CurrencyPicker
+          closeModal={handleCloseCurrencyPicker}
+          bottomSheetRef={bottomSheetRef}
+          currencySelected={currencySelected}
+          setCurrencySelected={setCurrencySelected}
+          handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput}
+        />
       </View>
-      <View style={styles.mainContainer}></View>
-      <View style={styles.footerContainer}>
-        <Pressable style={styles.button} onPress={handleOpenCurrencyPicker}>
-          <AppText style={styles.buttonText}>Open modal</AppText>
-        </Pressable>
-      </View>
-      <CurrencyPicker
-        closeModal={handleCloseCurrencyPicker}
-        bottomSheetRef={bottomSheetRef}
-        currencySelected={currencySelected}
-        setCurrencySelected={setCurrencySelected}
-        handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput}
-      />
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 
