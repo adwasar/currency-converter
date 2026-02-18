@@ -10,7 +10,11 @@ export default function Index() {
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
-  const handleCloseCurrencyPicker = () => bottomSheetRef.current?.close();
+  const handleCloseCurrencyPicker = () => {
+    Keyboard.dismiss();
+    bottomSheetRef.current?.close();
+  };
+
   const handleOpenCurrencyPicker = () => bottomSheetRef.current?.snapToIndex(2);
   const handlePressBottomSheetSearchInput = () => bottomSheetRef.current?.snapToIndex(2);
 

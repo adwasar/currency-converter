@@ -20,7 +20,7 @@ export default function CurrencyList({ currencySelected, setCurrencySelected }: 
     <BottomSheetFlatList
       style={styles.list}
       data={currencyItems}
-      renderItem={({ item }) => {
+      renderItem={({ item }: { item: (typeof currencyItems)[number] }) => {
         const isSelected = item.title === currencySelected;
 
         return (
