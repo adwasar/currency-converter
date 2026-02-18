@@ -1,5 +1,5 @@
-import { Image } from 'expo-image'
-import { Tabs } from 'expo-router'
+import { Image } from 'expo-image';
+import { Tabs } from 'expo-router';
 
 export default function RootLayout() {
   return (
@@ -77,5 +77,5 @@ export default function RootLayout() {
         }}
       />
     </Tabs>
-  )
+  );
 }

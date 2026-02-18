@@ -1,19 +1,19 @@
-import { useState } from 'react'
-import { StyleSheet, TextInput, View } from 'react-native'
-import { Image } from 'expo-image'
+import { useState } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
+import { Image } from 'expo-image';
 
-const icon = require('@/assets/images/search-icon.svg')
+const icon = require('@/assets/images/search-icon.svg');
 
 interface Props {
-  handlePressBottomSheetSearchInput: () => void
+  handlePressBottomSheetSearchInput: () => void;
 }
 
 export default function BottomSheetSearchInput({ handlePressBottomSheetSearchInput }: Props) {
-  const [text, onChangeText] = useState('')
+  const [text, onChangeText] = useState('');
 
   return (
     <View style={styles.container}>
-      <Image style={styles.icon} source={icon} contentFit='cover' />
+      <Image style={styles.icon} source={icon} contentFit="cover" />
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
@@ -22,7 +22,7 @@ export default function BottomSheetSearchInput({ handlePressBottomSheetSearchInp
         placeholder="Search..."
       />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -42,11 +42,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   icon: {
-    position: "absolute",
+    position: 'absolute',
     left: 32,
     top: '50%',
     width: 16,
     height: 16,
     transform: [{ translateY: -8 }],
   },
-})
+});

@@ -1,21 +1,27 @@
-import { StyleSheet, Pressable, View } from 'react-native'
-import { Image } from 'expo-image'
-import BottomSheet from '@gorhom/bottom-sheet'
+import { StyleSheet, Pressable, View } from 'react-native';
+import { Image } from 'expo-image';
+import BottomSheet from '@gorhom/bottom-sheet';
 
-import CurrencyList from './CurrencyList'
-import BottomSheetSearchInput from './BottomSheetSearchInput'
+import CurrencyList from './CurrencyList';
+import BottomSheetSearchInput from './BottomSheetSearchInput';
 
-const closeBtnIcon = require('@/assets/images/close-btn.svg')
+const closeBtnIcon = require('@/assets/images/close-btn.svg');
 
 interface Props {
-  closeModal: () => void
-  bottomSheetRef: React.RefObject<BottomSheet | null>
-  currencySelected: string | null
-  setCurrencySelected: (currency: string | null) => void
-  handlePressBottomSheetSearchInput: () => void
+  closeModal: () => void;
+  bottomSheetRef: React.RefObject<BottomSheet | null>;
+  currencySelected: string | null;
+  setCurrencySelected: (currency: string | null) => void;
+  handlePressBottomSheetSearchInput: () => void;
 }
 
-export default function CurrencyPicker({ closeModal, bottomSheetRef, currencySelected, setCurrencySelected, handlePressBottomSheetSearchInput }: Props) {
+export default function CurrencyPicker({
+  closeModal,
+  bottomSheetRef,
+  currencySelected,
+  setCurrencySelected,
+  handlePressBottomSheetSearchInput,
+}: Props) {
   return (
     <BottomSheet
       style={styles.container}
@@ -32,11 +38,11 @@ export default function CurrencyPicker({ closeModal, bottomSheetRef, currencySel
           </Pressable>
         </View>
       )}
-      >
+    >
       <BottomSheetSearchInput handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput} />
       <CurrencyList currencySelected={currencySelected} setCurrencySelected={setCurrencySelected} />
     </BottomSheet>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -74,4 +80,4 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-})
+});

@@ -1,18 +1,18 @@
-import { StyleSheet, View, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native'
-import { useState, useRef } from 'react'
-import BottomSheet from '@gorhom/bottom-sheet'
+import { StyleSheet, View, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { useState, useRef } from 'react';
+import BottomSheet from '@gorhom/bottom-sheet';
 
-import AppText from '@/components/AppText'
-import CurrencyPicker from '@/components/CurrencyPicker'
+import AppText from '@/components/AppText';
+import CurrencyPicker from '@/components/CurrencyPicker';
 
 export default function Index() {
-  const [currencySelected, setCurrencySelected] = useState<string | null>('AED')
+  const [currencySelected, setCurrencySelected] = useState<string | null>('AED');
 
-  const bottomSheetRef = useRef<BottomSheet>(null)
+  const bottomSheetRef = useRef<BottomSheet>(null);
 
-  const handleCloseCurrencyPicker = () => bottomSheetRef.current?.close()
-  const handleOpenCurrencyPicker = () => bottomSheetRef.current?.snapToIndex(2)
-  const handlePressBottomSheetSearchInput = () => bottomSheetRef.current?.snapToIndex(2)
+  const handleCloseCurrencyPicker = () => bottomSheetRef.current?.close();
+  const handleOpenCurrencyPicker = () => bottomSheetRef.current?.snapToIndex(2);
+  const handlePressBottomSheetSearchInput = () => bottomSheetRef.current?.snapToIndex(2);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -38,7 +38,7 @@ export default function Index() {
         />
       </View>
     </TouchableWithoutFeedback>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
   },
-})
+});

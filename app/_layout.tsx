@@ -1,11 +1,11 @@
-import { Stack } from 'expo-router'
-import { useFonts } from 'expo-font'
-import * as SplashScreen from 'expo-splash-screen'
-import { useEffect } from 'react'
-import { StatusBar } from 'expo-status-bar'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { Stack } from 'expo-router';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-SplashScreen.preventAutoHideAsync()
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -13,17 +13,17 @@ export default function RootLayout() {
     'SangBleuSans-Regular': require('@/assets/fonts/sangbleu-sans-regular.ttf'),
     'SFPro-Regular': require('@/assets/fonts/sf-pro-regular.ttf'),
     'SFPro-Medium': require('@/assets/fonts/sf-pro-display-bold.otf'),
-  })
+  });
 
   // Connecting fonts
   useEffect(() => {
     if (loaded || error) {
-      SplashScreen.hideAsync()
+      SplashScreen.hideAsync();
     }
-  }, [loaded, error])
+  }, [loaded, error]);
 
   if (!loaded && !error) {
-    return null
+    return null;
   }
   // END Connecting fonts
 
@@ -34,5 +34,5 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }}></Stack.Screen>
       </Stack>
     </GestureHandlerRootView>
-  )
+  );
 }

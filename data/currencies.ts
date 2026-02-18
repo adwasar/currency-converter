@@ -51,6 +51,6 @@ const currencyItems = [
     img: require('@/assets/images/currencies/USD.png'),
     title: 'USD',
   },
-]
+];
 
-export default currencyItems
+export default currencyItems;
