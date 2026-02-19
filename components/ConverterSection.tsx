@@ -5,13 +5,21 @@ import AppText from './AppText';
 import CurrencyPicker from './CurrencyPicker';
 
 interface Props {
-  currencySelected: string | null;
+  baseCurrencySelected: string | null;
+  targetCurrencySelected: string | null;
   handleOpenCurrencyPicker: () => void;
   title: string;
+  type: 'base' | 'target';
 }
 
-export default function ConverterSection({ currencySelected, handleOpenCurrencyPicker, title }: Props) {
-  const [amountText, setAmountText] = useState<string>('1.00');
+export default function ConverterSection({
+  baseCurrencySelected,
+  targetCurrencySelected,
+  handleOpenCurrencyPicker,
+  title,
+  type,
+}: Props) {
+  const [amountText, setAmountText] = useState<string>('0.00');
 
   const handleChange = (text: string) => {
     let cleaned = text.replace(/[^0-9.]/g, '');
@@ -48,7 +56,12 @@ export default function ConverterSection({ currencySelected, handleOpenCurrencyP
     <View>
       <AppText style={styles.text}>{title}</AppText>
       <View style={styles.sectionRow}>
-        <CurrencyPicker currencySelected={currencySelected} openCurrencyBottomSheet={handleOpenCurrencyPicker} />
+        <CurrencyPicker
+          baseCurrencySelected={baseCurrencySelected}
+          targetCurrencySelected={targetCurrencySelected}
+          openCurrencyBottomSheet={handleOpenCurrencyPicker}
+          type={type}
+        />
         <TextInput
           style={styles.input}
           value={amountText}

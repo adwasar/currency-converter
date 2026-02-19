@@ -4,23 +4,28 @@ import { StyleSheet, View } from 'react-native';
 import ConverterSection from './ConverterSection';
 
 interface Props {
-  currencySelected: string | null;
-  handleOpenCurrencyPicker: () => void;
+  baseCurrencySelected: string | null;
+  targetCurrencySelected: string | null;
+  handleOpenCurrencyPicker: (type: 'base' | 'target') => void;
 }
 
-export default function Converter({ currencySelected, handleOpenCurrencyPicker }: Props) {
+export default function Converter({ baseCurrencySelected, targetCurrencySelected, handleOpenCurrencyPicker }: Props) {
   return (
     <View style={styles.converter}>
       <ConverterSection
         title="Amount"
-        currencySelected={currencySelected}
-        handleOpenCurrencyPicker={handleOpenCurrencyPicker}
+        type="base"
+        baseCurrencySelected={baseCurrencySelected}
+        targetCurrencySelected={targetCurrencySelected}
+        handleOpenCurrencyPicker={() => handleOpenCurrencyPicker('base')}
       />
       <View style={styles.splitter}></View>
       <ConverterSection
         title="Converted Amount"
-        currencySelected={currencySelected}
-        handleOpenCurrencyPicker={handleOpenCurrencyPicker}
+        type="target"
+        baseCurrencySelected={baseCurrencySelected}
+        targetCurrencySelected={targetCurrencySelected}
+        handleOpenCurrencyPicker={() => handleOpenCurrencyPicker('target')}
       />
     </View>
   );

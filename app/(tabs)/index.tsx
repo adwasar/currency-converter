@@ -7,7 +7,9 @@ import Converter from '@/components/Converter';
 import CurrencyBottomSheet from '@/components/CurrencyBottomSheet';
 
 export default function Index() {
-  const [currencySelected, setCurrencySelected] = useState<string | null>('AED');
+  const [currentPickerType, setCurrentPickerType] = useState<'base' | 'target'>('base');
+  const [baseCurrencySelected, setBaseCurrencySelected] = useState<string | null>('EUR');
+  const [targetCurrencySelected, setTargetCurrencySelected] = useState<string | null>('USD');
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -15,8 +17,10 @@ export default function Index() {
     Keyboard.dismiss();
     bottomSheetRef.current?.close();
   };
-
-  const handleOpenCurrencyPicker = () => bottomSheetRef.current?.snapToIndex(2);
+  const handleOpenCurrencyPicker = (type: 'base' | 'target') => {
+    setCurrentPickerType(type);
+    bottomSheetRef.current?.snapToIndex(2);
+  };
   const handlePressBottomSheetSearchInput = () => bottomSheetRef.current?.snapToIndex(2);
 
   return (
@@ -29,14 +33,18 @@ export default function Index() {
           </AppText>
         </View>
         <View style={styles.mainContainer}>
-          <Converter currencySelected={currencySelected} handleOpenCurrencyPicker={handleOpenCurrencyPicker} />
+          <Converter
+            baseCurrencySelected={baseCurrencySelected}
+            targetCurrencySelected={targetCurrencySelected}
+            handleOpenCurrencyPicker={handleOpenCurrencyPicker}
+          />
         </View>
         <View style={styles.footerContainer}></View>
         <CurrencyBottomSheet
           handleCloseCurrencyPicker={handleCloseCurrencyPicker}
           bottomSheetRef={bottomSheetRef}
-          currencySelected={currencySelected}
-          setCurrencySelected={setCurrencySelected}
+          currencySelected={currentPickerType === 'base' ? baseCurrencySelected : targetCurrencySelected}
+          setCurrencySelected={currentPickerType === 'base' ? setBaseCurrencySelected : setTargetCurrencySelected}
           handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput}
         />
       </View>

@@ -7,17 +7,25 @@ import AppText from './AppText';
 import currencyItems from '@/data/currencies';
 
 interface Props {
-  currencySelected: string | null;
+  baseCurrencySelected: string | null;
+  targetCurrencySelected: string | null;
   openCurrencyBottomSheet: () => void;
+  type: 'base' | 'target';
 }
 
-export default function CurrencyPicker({ currencySelected, openCurrencyBottomSheet }: Props) {
+export default function CurrencyPicker({
+  baseCurrencySelected,
+  targetCurrencySelected,
+  openCurrencyBottomSheet,
+  type,
+}: Props) {
+  const currencySelected = type === 'base' ? baseCurrencySelected : targetCurrencySelected;
   const iconSource = currencyItems.find((item) => item.title === currencySelected)?.img;
 
   return (
     <Pressable style={styles.currencyPicker} onPress={openCurrencyBottomSheet}>
       <Image style={styles.icon} source={iconSource} />
-      <AppText style={styles.text}>{currencySelected}</AppText>
+      <AppText style={styles.text}>{baseCurrencySelected}</AppText>
       <Image style={styles.arrow} source={require('@/assets/images/arrow-bottom.svg')} />
     </Pressable>
   );
