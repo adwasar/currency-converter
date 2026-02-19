@@ -8,13 +8,14 @@ import currencyItems from '@/data/currencies';
 
 interface Props {
   currencySelected: string | null;
+  openCurrencyBottomSheet: () => void;
 }
 
-export default function CurrencyPicker({ currencySelected }: Props) {
+export default function CurrencyPicker({ currencySelected, openCurrencyBottomSheet }: Props) {
   const iconSource = currencyItems.find((item) => item.title === currencySelected)?.img;
 
   return (
-    <Pressable style={styles.currencyPicker} onPress={() => console.log('pressed')}>
+    <Pressable style={styles.currencyPicker} onPress={openCurrencyBottomSheet}>
       <Image style={styles.icon} source={iconSource} />
       <AppText style={styles.text}>{currencySelected}</AppText>
       <Image style={styles.arrow} source={require('@/assets/images/arrow-bottom.svg')} />

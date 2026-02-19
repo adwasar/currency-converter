@@ -6,9 +6,10 @@ import CurrencyPicker from './CurrencyPicker';
 
 interface Props {
   currencySelected: string | null;
+  handleOpenCurrencyPicker: () => void;
 }
 
-export default function Converter({ currencySelected }: Props) {
+export default function Converter({ currencySelected, handleOpenCurrencyPicker }: Props) {
   const [amountText, setAmountText] = useState<string>('1.00');
 
   const handleChange = (text: string) => {
@@ -47,7 +48,7 @@ export default function Converter({ currencySelected }: Props) {
       <View>
         <AppText style={styles.text}>Amount</AppText>
         <View style={styles.currencyRow}>
-          <CurrencyPicker currencySelected={currencySelected} />
+          <CurrencyPicker currencySelected={currencySelected} openCurrencyBottomSheet={handleOpenCurrencyPicker} />
           <TextInput
             style={styles.input}
             value={amountText}

@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, Pressable } from 'react-native';
-import { Image } from 'expo-image';
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import { Image } from 'expo-image';
+import React from 'react';
+import { Pressable, StyleSheet } from 'react-native';
 
 import currencyItems from '@/data/currencies';
 import AppText from './AppText';
@@ -9,11 +9,13 @@ import AppText from './AppText';
 interface Props {
   currencySelected: string | null;
   setCurrencySelected: (currency: string | null) => void;
+  handleCloseCurrencyPicker: () => void;
 }
 
-export default function CurrencyList({ currencySelected, setCurrencySelected }: Props) {
+export default function CurrencyList({ currencySelected, setCurrencySelected, handleCloseCurrencyPicker }: Props) {
   const handleItemPress = (currency: string) => {
     setCurrencySelected(currency);
+    handleCloseCurrencyPicker();
   };
 
   return (

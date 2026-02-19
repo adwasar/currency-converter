@@ -8,7 +8,7 @@ import CurrencyList from './CurrencyList';
 const closeBtnIcon = require('@/assets/images/close-btn.svg');
 
 interface Props {
-  closeModal: () => void;
+  handleCloseCurrencyPicker: () => void;
   bottomSheetRef: React.RefObject<BottomSheet | null>;
   currencySelected: string | null;
   setCurrencySelected: (currency: string | null) => void;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function CurrencyBottomSheet({
-  closeModal,
+  handleCloseCurrencyPicker,
   bottomSheetRef,
   currencySelected,
   setCurrencySelected,
@@ -33,14 +33,18 @@ export default function CurrencyBottomSheet({
       handleComponent={() => (
         <View style={styles.handlerContainer}>
           <View style={styles.handlerIndicator} />
-          <Pressable style={styles.modalBtnClose} onPress={closeModal}>
+          <Pressable style={styles.modalBtnClose} onPress={handleCloseCurrencyPicker}>
             <Image style={styles.modalBtnCloseImage} source={closeBtnIcon} contentFit="cover" />
           </Pressable>
         </View>
       )}
     >
       <BottomSheetSearchInput handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput} />
-      <CurrencyList currencySelected={currencySelected} setCurrencySelected={setCurrencySelected} />
+      <CurrencyList
+        currencySelected={currencySelected}
+        setCurrencySelected={setCurrencySelected}
+        handleCloseCurrencyPicker={handleCloseCurrencyPicker}
+      />
     </BottomSheet>
   );
 }

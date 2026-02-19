@@ -1,6 +1,6 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useRef, useState } from 'react';
-import { Keyboard, Pressable, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { Keyboard, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
 import AppText from '@/components/AppText';
 import Converter from '@/components/Converter';
@@ -29,15 +29,11 @@ export default function Index() {
           </AppText>
         </View>
         <View style={styles.mainContainer}>
-          <Converter currencySelected={currencySelected} />
+          <Converter currencySelected={currencySelected} handleOpenCurrencyPicker={handleOpenCurrencyPicker} />
         </View>
-        <View style={styles.footerContainer}>
-          <Pressable style={styles.button} onPress={handleOpenCurrencyPicker}>
-            <AppText style={styles.buttonText}>Open modal</AppText>
-          </Pressable>
-        </View>
+        <View style={styles.footerContainer}></View>
         <CurrencyBottomSheet
-          closeModal={handleCloseCurrencyPicker}
+          handleCloseCurrencyPicker={handleCloseCurrencyPicker}
           bottomSheetRef={bottomSheetRef}
           currencySelected={currencySelected}
           setCurrencySelected={setCurrencySelected}
@@ -86,17 +82,5 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  button: {
-    width: '100%',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 16,
-    backgroundColor: '#fff',
-    borderColor: '#393737',
-    borderWidth: 1,
-  },
-  buttonText: {
-    textAlign: 'center',
   },
 });
