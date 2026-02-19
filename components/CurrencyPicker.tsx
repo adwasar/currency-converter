@@ -1,83 +1,44 @@
-import { StyleSheet, Pressable, View } from 'react-native';
 import { Image } from 'expo-image';
-import BottomSheet from '@gorhom/bottom-sheet';
+import React from 'react';
+import { Pressable, StyleSheet } from 'react-native';
 
-import CurrencyList from './CurrencyList';
-import BottomSheetSearchInput from './BottomSheetSearchInput';
+import AppText from './AppText';
 
-const closeBtnIcon = require('@/assets/images/close-btn.svg');
+import currencyItems from '@/data/currencies';
 
 interface Props {
-  closeModal: () => void;
-  bottomSheetRef: React.RefObject<BottomSheet | null>;
   currencySelected: string | null;
-  setCurrencySelected: (currency: string | null) => void;
-  handlePressBottomSheetSearchInput: () => void;
 }
 
-export default function CurrencyPicker({
-  closeModal,
-  bottomSheetRef,
-  currencySelected,
-  setCurrencySelected,
-  handlePressBottomSheetSearchInput,
-}: Props) {
+export default function CurrencyPicker({ currencySelected }: Props) {
+  const iconSource = currencyItems.find((item) => item.title === currencySelected)?.img;
+
   return (
-    <BottomSheet
-      style={styles.container}
-      ref={bottomSheetRef}
-      snapPoints={['35%', '70%']}
-      maxDynamicContentSize={0}
-      index={-1}
-      enableContentPanningGesture={false}
-      handleComponent={() => (
-        <View style={styles.handlerContainer}>
-          <View style={styles.handlerIndicator} />
-          <Pressable style={styles.modalBtnClose} onPress={closeModal}>
-            <Image style={styles.modalBtnCloseImage} source={closeBtnIcon} contentFit="cover" />
-          </Pressable>
-        </View>
-      )}
-    >
-      <BottomSheetSearchInput handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput} />
-      <CurrencyList currencySelected={currencySelected} setCurrencySelected={setCurrencySelected} />
-    </BottomSheet>
+    <Pressable style={styles.currencyPicker} onPress={() => console.log('pressed')}>
+      <Image style={styles.icon} source={iconSource} />
+      <AppText style={styles.text}>{currencySelected}</AppText>
+      <Image style={styles.arrow} source={require('@/assets/images/arrow-bottom.svg')} />
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 13.84,
-    elevation: 5,
-  },
-  handlerContainer: {
+  currencyPicker: {
+    padding: 10,
+    flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
+    gap: 10,
   },
-  handlerIndicator: {
-    width: 44,
-    height: 5,
-    backgroundColor: '#E8E8E8',
-    borderRadius: 3,
+  icon: {
+    width: 30,
+    height: 30,
   },
-  modalBtnClose: {
-    position: 'absolute',
-    right: 16,
-    top: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 46,
-    height: 46,
+  text: {
+    color: '#26278D',
+    fontWeight: '500',
   },
-  modalBtnCloseImage: {
-    width: '100%',
-    height: '100%',
+  arrow: {
+    width: 12,
+    height: 7,
   },
 });

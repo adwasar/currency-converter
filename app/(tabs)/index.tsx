@@ -1,9 +1,10 @@
-import { StyleSheet, View, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { useState, useRef } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
+import { useRef, useState } from 'react';
+import { Keyboard, Pressable, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
 import AppText from '@/components/AppText';
-import CurrencyPicker from '@/components/CurrencyPicker';
+import Converter from '@/components/Converter';
+import CurrencyBottomSheet from '@/components/CurrencyBottomSheet';
 
 export default function Index() {
   const [currencySelected, setCurrencySelected] = useState<string | null>('AED');
@@ -27,13 +28,15 @@ export default function Index() {
             Check live rates, set rate alerts, receive notifications and more.
           </AppText>
         </View>
-        <View style={styles.mainContainer}></View>
+        <View style={styles.mainContainer}>
+          <Converter currencySelected={currencySelected} />
+        </View>
         <View style={styles.footerContainer}>
           <Pressable style={styles.button} onPress={handleOpenCurrencyPicker}>
             <AppText style={styles.buttonText}>Open modal</AppText>
           </Pressable>
         </View>
-        <CurrencyPicker
+        <CurrencyBottomSheet
           closeModal={handleCloseCurrencyPicker}
           bottomSheetRef={bottomSheetRef}
           currencySelected={currencySelected}
