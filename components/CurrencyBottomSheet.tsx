@@ -10,16 +10,12 @@ const closeBtnIcon = require('@/assets/images/close-btn.svg');
 interface Props {
   handleCloseCurrencyPicker: () => void;
   bottomSheetRef: React.RefObject<BottomSheet | null>;
-  currencySelected: string | null;
-  setCurrencySelected: (currency: string | null) => void;
   handlePressBottomSheetSearchInput: () => void;
 }
 
 export default function CurrencyBottomSheet({
   handleCloseCurrencyPicker,
   bottomSheetRef,
-  currencySelected,
-  setCurrencySelected,
   handlePressBottomSheetSearchInput,
 }: Props) {
   return (
@@ -40,11 +36,7 @@ export default function CurrencyBottomSheet({
       )}
     >
       <BottomSheetSearchInput handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput} />
-      <CurrencyList
-        currencySelected={currencySelected}
-        setCurrencySelected={setCurrencySelected}
-        handleCloseCurrencyPicker={handleCloseCurrencyPicker}
-      />
+      <CurrencyList handleCloseCurrencyPicker={handleCloseCurrencyPicker} />
     </BottomSheet>
   );
 }

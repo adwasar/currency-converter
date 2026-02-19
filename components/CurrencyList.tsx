@@ -1,22 +1,35 @@
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { Image } from 'expo-image';
-import React from 'react';
+import { useContext } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 
 import currencyItems from '@/data/currencies';
 import AppText from './AppText';
 
+import CurrencyContext from '@/context/CurrencyContext';
 interface Props {
-  currencySelected: string | null;
-  setCurrencySelected: (currency: string | null) => void;
   handleCloseCurrencyPicker: () => void;
 }
 
-export default function CurrencyList({ currencySelected, setCurrencySelected, handleCloseCurrencyPicker }: Props) {
+export default function CurrencyList({ handleCloseCurrencyPicker }: Props) {
+  const {
+    currentPickerType,
+    setBaseCurrencySelected,
+    setTargetCurrencySelected,
+    baseCurrencySelected,
+    targetCurrencySelected,
+  } = useContext(CurrencyContext)!;
+
   const handleItemPress = (currency: string) => {
-    setCurrencySelected(currency);
+    if (currentPickerType === 'base') {
+      setBaseCurrencySelected(currency);
+    } else if (currentPickerType === 'target') {
+      setTargetCurrencySelected(currency);
+    }
     handleCloseCurrencyPicker();
   };
+
+  const currencySelected = currentPickerType === 'base' ? baseCurrencySelected : targetCurrencySelected;
 
   return (
     <BottomSheetFlatList

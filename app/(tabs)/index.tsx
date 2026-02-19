@@ -1,15 +1,15 @@
 import BottomSheet from '@gorhom/bottom-sheet';
-import { useRef, useState } from 'react';
+import { useContext, useRef } from 'react';
 import { Keyboard, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
 import AppText from '@/components/AppText';
 import Converter from '@/components/Converter';
 import CurrencyBottomSheet from '@/components/CurrencyBottomSheet';
 
+import CurrencyContext from '@/context/CurrencyContext';
+
 export default function Index() {
-  const [currentPickerType, setCurrentPickerType] = useState<'base' | 'target'>('base');
-  const [baseCurrencySelected, setBaseCurrencySelected] = useState<string | null>('EUR');
-  const [targetCurrencySelected, setTargetCurrencySelected] = useState<string | null>('USD');
+  const { setCurrentPickerType } = useContext(CurrencyContext)!;
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -33,18 +33,12 @@ export default function Index() {
           </AppText>
         </View>
         <View style={styles.mainContainer}>
-          <Converter
-            baseCurrencySelected={baseCurrencySelected}
-            targetCurrencySelected={targetCurrencySelected}
-            handleOpenCurrencyPicker={handleOpenCurrencyPicker}
-          />
+          <Converter handleOpenCurrencyPicker={handleOpenCurrencyPicker} />
         </View>
         <View style={styles.footerContainer}></View>
         <CurrencyBottomSheet
           handleCloseCurrencyPicker={handleCloseCurrencyPicker}
           bottomSheetRef={bottomSheetRef}
-          currencySelected={currentPickerType === 'base' ? baseCurrencySelected : targetCurrencySelected}
-          setCurrencySelected={currentPickerType === 'base' ? setBaseCurrencySelected : setTargetCurrencySelected}
           handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput}
         />
       </View>
