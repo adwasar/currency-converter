@@ -24,10 +24,8 @@ export default function RootLayout() {
   };
 
   const [loaded, error] = useFonts({
-    'SangBleuSans-Medium': require('@/assets/fonts/sangbleu-sans-medium.ttf'),
-    'SangBleuSans-Regular': require('@/assets/fonts/sangbleu-sans-regular.ttf'),
-    'SFPro-Regular': require('@/assets/fonts/sf-pro-regular.ttf'),
-    'SFPro-Medium': require('@/assets/fonts/sf-pro-display-bold.otf'),
+    'SFPro-Regular': require('@/assets/fonts/sf-pro-display-regular.otf'),
+    'SFPro-Medium': require('@/assets/fonts/sf-pro-display-medium.otf'),
   });
 
   // Connecting fonts

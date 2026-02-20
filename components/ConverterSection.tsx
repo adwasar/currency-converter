@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#EFEFEF',
     color: '#3C3C3C',
-    fontFamily: 'SangBleuSans-Medium',
+    fontFamily: 'SFPro-Medium',
   },
   text: {
     color: '#808080',

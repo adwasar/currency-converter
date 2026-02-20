@@ -10,8 +10,8 @@ export default function RootLayout() {
           boxShadow: '0px 1px 4px 0px rgba(0, 0, 0, 0.25)',
         },
         headerTitleStyle: {
-          fontFamily: 'SangBleuSans-Medium',
-          fontSize: 16,
+          fontFamily: 'SFPro-Medium',
+          fontSize: 22,
         },
         headerTitleAlign: 'left',
         headerTintColor: '#141414',
@@ -22,8 +22,8 @@ export default function RootLayout() {
           boxShadow: '0px -2px 8px 0px rgba(0, 0, 0, 0.15)',
         },
         tabBarLabelStyle: {
-          fontSize: 12,
-          fontFamily: 'SangBleuSans-Medium',
+          fontSize: 14,
+          fontFamily: 'SFPro-Medium',
         },
       }}
     >

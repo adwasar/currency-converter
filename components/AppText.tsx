@@ -1,5 +1,5 @@
-import { Text, TextStyle } from 'react-native';
 import React from 'react';
+import { Text, TextStyle } from 'react-native';
 
 interface Props {
   children: React.ReactNode;
@@ -8,10 +8,10 @@ interface Props {
 
 const getFontFamily = (fontWeight: TextStyle['fontWeight']) => {
   if (fontWeight === 500 || fontWeight === '500' || fontWeight === 'medium') {
-    return 'SangBleuSans-Medium';
+    return 'SFPro-Medium';
   }
 
-  return 'SangBleuSans-Regular';
+  return 'SFPro-Regular';
 };
 
 export default function AppText({ style, children }: Props) {

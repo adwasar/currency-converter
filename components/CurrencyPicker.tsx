@@ -22,7 +22,7 @@ export default function CurrencyPicker({ openCurrencyBottomSheet, type }: Props)
   return (
     <Pressable style={styles.currencyPicker} onPress={openCurrencyBottomSheet}>
       <Image style={styles.icon} source={iconSource} />
-      <AppText style={styles.text}>{baseCurrencySelected}</AppText>
+      <AppText style={styles.text}>{currencySelected}</AppText>
       <Image style={styles.arrow} source={require('@/assets/images/arrow-bottom.svg')} />
     </Pressable>
   );
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#26278D',
     fontWeight: '500',
+    fontSize: 16,
   },
   arrow: {
     width: 12,

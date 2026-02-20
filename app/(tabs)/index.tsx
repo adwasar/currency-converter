@@ -54,22 +54,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#F6F6F6',
   },
   headerContainer: {
+    paddingTop: 64,
     flex: 1 / 4,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
     paddingHorizontal: 32,
   },
   headerTitle: {
     color: '#1F2261',
-    fontSize: 20,
+    fontSize: 32,
     fontWeight: 500,
     textAlign: 'center',
   },
   headerSubTitle: {
-    marginTop: 16,
+    marginTop: 24,
     color: '#808080',
-    fontSize: 14,
+    fontSize: 18,
+    fontFamily: 'SFPro-Regular',
     textAlign: 'center',
   },
   mainContainer: {
