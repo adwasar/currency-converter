@@ -1,6 +1,6 @@
+import { Image } from 'expo-image';
 import { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
-import { Image } from 'expo-image';
 
 const icon = require('@/assets/images/search-icon.svg');
 
@@ -20,6 +20,7 @@ export default function BottomSheetSearchInput({ handlePressBottomSheetSearchInp
         onPress={handlePressBottomSheetSearchInput}
         value={text}
         placeholder="Search..."
+        placeholderTextColor="#A6A1A1"
       />
     </View>
   );
@@ -37,6 +38,8 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingStart: 36,
     width: '100%',
+    fontFamily: 'SangBleuSans-Regular',
+    fontSize: 12,
     borderWidth: 1.5,
     borderColor: '#26278D',
     borderRadius: 5,

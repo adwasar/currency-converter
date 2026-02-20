@@ -14,7 +14,7 @@ export default function RootLayout() {
   const [baseCurrencySelected, setBaseCurrencySelected] = useState<string>('EUR');
   const [targetCurrencySelected, setTargetCurrencySelected] = useState<string>('USD');
 
-  const CurrencyContextValue = {
+  const currencyContextValue = {
     currentPickerType,
     setCurrentPickerType,
     baseCurrencySelected,
@@ -43,7 +43,7 @@ export default function RootLayout() {
   // END Connecting fonts
 
   return (
-    <CurrencyContext value={CurrencyContextValue}>
+    <CurrencyContext value={currencyContextValue}>
       <GestureHandlerRootView>
         <StatusBar style="dark" />
         <Stack>
