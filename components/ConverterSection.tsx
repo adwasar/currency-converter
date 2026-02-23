@@ -55,6 +55,7 @@ export default function ConverterSection({ handleOpenCurrencyPicker, title, type
           keyboardType="numeric"
           onChangeText={handleChange}
           onBlur={handleBlur}
+          editable={type === 'base'}
         />
       </View>
     </View>
