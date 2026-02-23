@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
 import AppText from './AppText';
@@ -8,42 +7,19 @@ interface Props {
   handleOpenCurrencyPicker: () => void;
   title: string;
   type: 'base' | 'target';
+  amount: string;
+  handleChange?: (value: string) => void;
+  handleBlur?: () => void;
 }
 
-export default function ConverterSection({ handleOpenCurrencyPicker, title, type }: Props) {
-  const [amountText, setAmountText] = useState<string>('0.00');
-
-  const handleChange = (text: string) => {
-    let cleaned = text.replace(/[^0-9.]/g, '');
-
-    const parts = cleaned.split('.');
-    if (parts.length > 2) {
-      cleaned = parts[0] + '.' + parts.slice(1).join('');
-    }
-
-    if (parts.length === 2) {
-      const integer = parts[0];
-      const decimal = parts[1].slice(0, 2);
-      cleaned = integer + (decimal ? '.' + decimal : '.');
-    }
-
-    setAmountText(cleaned);
-  };
-
-  const handleBlur = () => {
-    if (!amountText.trim()) {
-      setAmountText('0.00');
-      return;
-    }
-
-    const num = Number(amountText);
-    if (!isNaN(num)) {
-      setAmountText(num.toFixed(2));
-    } else {
-      setAmountText('0.00');
-    }
-  };
-
+export default function ConverterSection({
+  handleOpenCurrencyPicker,
+  title,
+  type,
+  handleChange,
+  handleBlur,
+  amount,
+}: Props) {
   return (
     <View>
       <AppText style={styles.text}>{title}</AppText>
@@ -51,7 +27,7 @@ export default function ConverterSection({ handleOpenCurrencyPicker, title, type
         <CurrencyPicker openCurrencyBottomSheet={handleOpenCurrencyPicker} type={type} />
         <TextInput
           style={styles.input}
-          value={amountText}
+          value={amount}
           keyboardType="numeric"
           onChangeText={handleChange}
           onBlur={handleBlur}

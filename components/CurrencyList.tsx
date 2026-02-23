@@ -12,31 +12,32 @@ interface Props {
 }
 
 export default function CurrencyList({ handleCloseCurrencyPicker }: Props) {
-  const {
-    currentPickerType,
-    setBaseCurrencySelected,
-    setTargetCurrencySelected,
-    baseCurrencySelected,
-    targetCurrencySelected,
-  } = useContext(CurrencyContext)!;
+  const { currentPickerType, setBaseCurrency, setTargetCurrency, baseCurrency, targetCurrency } =
+    useContext(CurrencyContext)!;
 
   const handleItemPress = (currency: string) => {
     if (currentPickerType === 'base') {
-      setBaseCurrencySelected(currency);
+      setBaseCurrency({
+        ...baseCurrency,
+        title: currency,
+      });
     } else if (currentPickerType === 'target') {
-      setTargetCurrencySelected(currency);
+      setTargetCurrency({
+        ...targetCurrency,
+        title: currency,
+      });
     }
     handleCloseCurrencyPicker();
   };
 
-  const currencySelected = currentPickerType === 'base' ? baseCurrencySelected : targetCurrencySelected;
+  const currencySelected = currentPickerType === 'base' ? baseCurrency : targetCurrency;
 
   return (
     <BottomSheetFlatList
       style={styles.list}
       data={currencyItems}
       renderItem={({ item }: { item: (typeof currencyItems)[number] }) => {
-        const isSelected = item.title === currencySelected;
+        const isSelected = item.title === currencySelected.title;
 
         return (
           <Pressable

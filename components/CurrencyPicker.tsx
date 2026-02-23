@@ -14,15 +14,15 @@ interface Props {
 }
 
 export default function CurrencyPicker({ openCurrencyBottomSheet, type }: Props) {
-  const { baseCurrencySelected, targetCurrencySelected } = useContext(CurrencyContext)!;
+  const { baseCurrency, targetCurrency } = useContext(CurrencyContext)!;
 
-  const currencySelected = type === 'base' ? baseCurrencySelected : targetCurrencySelected;
-  const iconSource = currencyItems.find((item) => item.title === currencySelected)?.img;
+  const currencySelected = type === 'base' ? baseCurrency : targetCurrency;
+  const iconSource = currencyItems.find((item) => item.title === currencySelected.title)?.img;
 
   return (
     <Pressable style={styles.currencyPicker} onPress={openCurrencyBottomSheet}>
       <Image style={styles.icon} source={iconSource} />
-      <AppText style={styles.text}>{currencySelected}</AppText>
+      <AppText style={styles.text}>{currencySelected.title}</AppText>
       <Image style={styles.arrow} source={require('@/assets/images/arrow-bottom.svg')} />
     </Pressable>
   );

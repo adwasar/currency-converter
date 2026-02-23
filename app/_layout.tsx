@@ -11,16 +11,16 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [currentPickerType, setCurrentPickerType] = useState<'base' | 'target'>('base');
-  const [baseCurrencySelected, setBaseCurrencySelected] = useState<string>('EUR');
-  const [targetCurrencySelected, setTargetCurrencySelected] = useState<string>('USD');
+  const [baseCurrency, setBaseCurrency] = useState({ title: 'EUR', amount: '0.00' });
+  const [targetCurrency, setTargetCurrency] = useState({ title: 'USD', amount: '0.00' });
 
   const currencyContextValue = {
     currentPickerType,
     setCurrentPickerType,
-    baseCurrencySelected,
-    setBaseCurrencySelected,
-    targetCurrencySelected,
-    setTargetCurrencySelected,
+    baseCurrency,
+    setBaseCurrency,
+    targetCurrency,
+    setTargetCurrency,
   };
 
   const [loaded, error] = useFonts({
