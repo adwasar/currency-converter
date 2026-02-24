@@ -11,7 +11,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [currentPickerType, setCurrentPickerType] = useState<'base' | 'target'>('base');
-  const [baseCurrency, setBaseCurrency] = useState({ title: 'EUR', amount: '0.00' });
+  const [baseCurrency, setBaseCurrency] = useState({ title: 'EUR', amount: '1.00' });
   const [targetCurrency, setTargetCurrency] = useState({ title: 'USD', amount: '0.00' });
 
   const currencyContextValue = {
@@ -34,6 +34,33 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded, error]);
+
+  useEffect(() => {
+    const base = baseCurrency.title;
+    const target = targetCurrency.title;
+    const amount = Number(baseCurrency.amount);
+
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch(`https://api.frankfurter.dev/v1/latest?base=${base}&symbols=${target}`);
+        const data = await res.json();
+
+        if (!data.rates?.[target]) return;
+
+        const rate = data.rates[target];
+        const calculated = (rate * amount).toFixed(2);
+
+        setTargetCurrency((prev) => ({
+          ...prev,
+          amount: calculated,
+        }));
+      } catch (err) {
+        console.error(err);
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [baseCurrency.title, baseCurrency.amount, targetCurrency.title]);
 
   if (!loaded && !error) {
     return null;
