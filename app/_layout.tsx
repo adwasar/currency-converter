@@ -45,7 +45,7 @@ export default function RootLayout() {
         const res = await fetch(`https://cdn.moneyconvert.net/api/latest.json`);
         const data = await res.json();
 
-        const rate = data.rates[base] / data.rates[target];
+        const rate = data.rates[target] / data.rates[base];
         const calculated = (rate * amount).toFixed(2);
 
         setTargetCurrency((prev) => ({
