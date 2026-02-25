@@ -42,12 +42,10 @@ export default function RootLayout() {
 
     const timer = setTimeout(async () => {
       try {
-        const res = await fetch(`https://api.frankfurter.dev/v1/latest?base=${base}&symbols=${target}`);
+        const res = await fetch(`https://cdn.moneyconvert.net/api/latest.json`);
         const data = await res.json();
 
-        if (!data.rates?.[target]) return;
-
-        const rate = data.rates[target];
+        const rate = data.rates[base] / data.rates[target];
         const calculated = (rate * amount).toFixed(2);
 
         setTargetCurrency((prev) => ({
