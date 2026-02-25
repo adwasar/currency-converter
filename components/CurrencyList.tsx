@@ -9,9 +9,10 @@ import AppText from './AppText';
 import CurrencyContext from '@/context/CurrencyContext';
 interface Props {
   handleCloseCurrencyPicker: () => void;
+  inputValue: string;
 }
 
-export default function CurrencyList({ handleCloseCurrencyPicker }: Props) {
+export default function CurrencyList({ handleCloseCurrencyPicker, inputValue }: Props) {
   const { currentPickerType, setBaseCurrency, setTargetCurrency, baseCurrency, targetCurrency } =
     useContext(CurrencyContext)!;
 
@@ -32,10 +33,14 @@ export default function CurrencyList({ handleCloseCurrencyPicker }: Props) {
 
   const currencySelected = currentPickerType === 'base' ? baseCurrency : targetCurrency;
 
+  const filteredCurrencyItems = currencyItems.filter((item) =>
+    item.title.toLowerCase().includes(inputValue.trim().toLowerCase()),
+  );
+
   return (
     <BottomSheetFlatList
       style={styles.list}
-      data={currencyItems}
+      data={filteredCurrencyItems}
       renderItem={({ item }: { item: (typeof currencyItems)[number] }) => {
         const isSelected = item.title === currencySelected.title;
 

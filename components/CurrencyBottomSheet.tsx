@@ -1,5 +1,6 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { Image } from 'expo-image';
+import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import BottomSheetSearchInput from './BottomSheetSearchInput';
@@ -18,6 +19,12 @@ export default function CurrencyBottomSheet({
   bottomSheetRef,
   handlePressBottomSheetSearchInput,
 }: Props) {
+  const [inputValue, setInputValue] = useState<string>('');
+
+  const handleChange = (value: string) => {
+    setInputValue(value);
+  };
+
   return (
     <BottomSheet
       style={styles.container}
@@ -35,8 +42,12 @@ export default function CurrencyBottomSheet({
         </View>
       )}
     >
-      <BottomSheetSearchInput handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput} />
-      <CurrencyList handleCloseCurrencyPicker={handleCloseCurrencyPicker} />
+      <BottomSheetSearchInput
+        handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput}
+        handleChange={handleChange}
+        inputValue={inputValue}
+      />
+      <CurrencyList handleCloseCurrencyPicker={handleCloseCurrencyPicker} inputValue={inputValue} />
     </BottomSheet>
   );
 }

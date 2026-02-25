@@ -1,24 +1,23 @@
 import { Image } from 'expo-image';
-import { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
 const icon = require('@/assets/images/search-icon.svg');
 
 interface Props {
   handlePressBottomSheetSearchInput: () => void;
+  handleChange: (value: string) => void;
+  inputValue: string;
 }
 
-export default function BottomSheetSearchInput({ handlePressBottomSheetSearchInput }: Props) {
-  const [text, onChangeText] = useState('');
-
+export default function BottomSheetSearchInput({ handlePressBottomSheetSearchInput, handleChange, inputValue }: Props) {
   return (
     <View style={styles.container}>
       <Image style={styles.icon} source={icon} contentFit="cover" />
       <TextInput
         style={styles.input}
-        onChangeText={onChangeText}
+        onChangeText={handleChange}
         onPress={handlePressBottomSheetSearchInput}
-        value={text}
+        value={inputValue}
         placeholder="Search..."
         placeholderTextColor="#A6A1A1"
       />
