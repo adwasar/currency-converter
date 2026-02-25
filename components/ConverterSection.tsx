@@ -10,6 +10,7 @@ interface Props {
   amount: string;
   handleChange?: (value: string) => void;
   handleBlur?: () => void;
+  handleFocus?: () => void;
 }
 
 export default function ConverterSection({
@@ -18,6 +19,7 @@ export default function ConverterSection({
   type,
   handleChange,
   handleBlur,
+  handleFocus,
   amount,
 }: Props) {
   return (
@@ -31,6 +33,7 @@ export default function ConverterSection({
           keyboardType="numeric"
           onChangeText={handleChange}
           onBlur={handleBlur}
+          onFocus={handleFocus}
           editable={type === 'base'}
         />
       </View>

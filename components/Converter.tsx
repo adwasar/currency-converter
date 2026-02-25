@@ -13,25 +13,30 @@ export default function Converter({ handleOpenCurrencyPicker }: Props) {
   const { baseCurrency, setBaseCurrency, targetCurrency } = useContext(CurrencyContext)!;
 
   const handleChange = (text: string) => {
-    let cleaned = text.replace(/[^0-9.]/g, '');
-
-    const parts = cleaned.split('.');
+    const parts = text.split('.');
     if (parts.length > 2) {
-      cleaned = parts[0] + '.' + parts.slice(1).join('');
+      text = parts[0] + '.' + parts.slice(1).join('');
     }
 
-    if (parts.length === 2) {
-      const integer = parts[0];
-      const decimal = parts[1].slice(0, 2);
-      cleaned = integer + (decimal ? '.' + decimal : '.');
+    setBaseCurrency({ ...baseCurrency, amount: text });
+  };
+
+  const handleFocus = () => {
+    const amountNumber = Number(baseCurrency.amount);
+
+    if (amountNumber === 1) {
+      setBaseCurrency({ ...baseCurrency, amount: '' });
+      return;
     }
 
-    setBaseCurrency({ ...baseCurrency, amount: cleaned });
+    if (Number.isInteger(amountNumber)) {
+      setBaseCurrency({ ...baseCurrency, amount: amountNumber.toString() });
+    }
   };
 
   const handleBlur = () => {
     if (!baseCurrency.amount.trim()) {
-      setBaseCurrency({ ...baseCurrency, amount: '0.00' });
+      setBaseCurrency({ ...baseCurrency, amount: '1.00' });
       return;
     }
 
@@ -39,7 +44,7 @@ export default function Converter({ handleOpenCurrencyPicker }: Props) {
     if (!isNaN(num)) {
       setBaseCurrency({ ...baseCurrency, amount: num.toFixed(2) });
     } else {
-      setBaseCurrency({ ...baseCurrency, amount: '0.00' });
+      setBaseCurrency({ ...baseCurrency, amount: '1.00' });
     }
   };
 
@@ -51,6 +56,7 @@ export default function Converter({ handleOpenCurrencyPicker }: Props) {
         handleOpenCurrencyPicker={() => handleOpenCurrencyPicker('base')}
         handleChange={handleChange}
         handleBlur={handleBlur}
+        handleFocus={handleFocus}
         amount={baseCurrency.amount}
       />
       <View style={styles.splitter}></View>
