@@ -48,6 +48,10 @@ const currencyItems = [
     title: 'NGN',
   },
   {
+    img: require('@/assets/images/currencies/UAH.png'),
+    title: 'UAH',
+  },
+  {
     img: require('@/assets/images/currencies/USD.png'),
     title: 'USD',
   },
