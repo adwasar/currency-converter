@@ -16,7 +16,7 @@ export default function BottomSheetSearchInput({ handlePressBottomSheetSearchInp
       <TextInput
         style={styles.input}
         onChangeText={handleChange}
-        onPress={handlePressBottomSheetSearchInput}
+        onFocus={handlePressBottomSheetSearchInput}
         value={inputValue}
         placeholder="Search..."
         placeholderTextColor="#A6A1A1"
