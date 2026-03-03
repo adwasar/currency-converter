@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import ConverterSection from './ConverterSection';
+import SwitchBtn from './SwitchBtn';
 
 import CurrencyContext from '@/context/CurrencyContext';
 
@@ -66,16 +67,26 @@ export default function Converter({ handleOpenCurrencyPicker }: Props) {
         handleOpenCurrencyPicker={() => handleOpenCurrencyPicker('target')}
         amount={targetCurrency.amount}
       />
+      <View style={styles.switchBtmContainer}>
+        <SwitchBtn />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   converter: {
+    position: 'relative',
     padding: 24,
     backgroundColor: '#fff',
     borderRadius: 18,
-    gap: 24,
+    gap: 32,
+  },
+  switchBtmContainer: {
+    position: 'absolute',
+    inset: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   splitter: {
     width: '100%',
