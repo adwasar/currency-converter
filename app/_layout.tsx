@@ -36,16 +36,18 @@ export default function RootLayout() {
   }, [loaded, error]);
 
   useEffect(() => {
-    const base = baseCurrency.title;
-    const target = targetCurrency.title;
+    const base = baseCurrency.title.toLowerCase();
+    const target = targetCurrency.title.toLowerCase();
     const amount = Number(baseCurrency.amount);
 
     const timer = setTimeout(async () => {
       try {
-        const res = await fetch(`https://cdn.moneyconvert.net/api/latest.json`);
+        const res = await fetch(
+          `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${base}.json`,
+        );
         const data = await res.json();
 
-        const rate = data.rates[target] / data.rates[base];
+        const rate = data[base][target];
         const calculated = (rate * amount).toFixed(2);
 
         setTargetCurrency((prev) => ({
