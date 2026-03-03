@@ -10,13 +10,15 @@ import CurrencyContext from '@/context/CurrencyContext';
 interface Props {
   handleCloseCurrencyPicker: () => void;
   inputValue: string;
+  setInputValue: (value: string) => void;
 }
 
-export default function CurrencyList({ handleCloseCurrencyPicker, inputValue }: Props) {
+export default function CurrencyList({ handleCloseCurrencyPicker, inputValue, setInputValue }: Props) {
   const { currentPickerType, setBaseCurrency, setTargetCurrency, baseCurrency, targetCurrency } =
     useContext(CurrencyContext)!;
 
   const handleItemPress = (currency: string) => {
+    setInputValue('');
     if (currentPickerType === 'base') {
       setBaseCurrency({
         ...baseCurrency,

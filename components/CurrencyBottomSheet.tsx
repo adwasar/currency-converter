@@ -47,7 +47,11 @@ export default function CurrencyBottomSheet({
         handleChange={handleChange}
         inputValue={inputValue}
       />
-      <CurrencyList handleCloseCurrencyPicker={handleCloseCurrencyPicker} inputValue={inputValue} />
+      <CurrencyList
+        handleCloseCurrencyPicker={handleCloseCurrencyPicker}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />
     </BottomSheet>
   );
 }
