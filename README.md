@@ -1,50 +1,76 @@
-# Welcome to your Expo app 👋
+# 💱 Currency Converter
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile application for quick and convenient currency conversion.
 
-## Get started
+---
 
-1. Install dependencies
+## 📱 About
 
-   ```bash
-   npm install
-   ```
+**Currency Converter** is a mobile app built with React Native (Expo) that allows users to instantly convert between world currencies using up-to-date exchange rates.
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🚀 Getting Started
 
-In the output, you'll find options to open the app in a
+### Prerequisites
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+- [Node.js](https://nodejs.org/) v18+
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
 
 ```bash
-npm run reset-project
+npm install -g expo-cli
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Installation
 
-## Learn more
+```bash
+# Clone the repository
+git clone https://github.com/your-username/currency-converter.git
 
-To learn more about developing your project with Expo, look at the following resources:
+# Navigate to project directory
+cd currency-converter
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+# Install dependencies
+npm install
+```
 
-## Join the community
+### Running the App
 
-Join our community of developers creating universal apps.
+```bash
+npx expo start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Then scan the QR code with the **Expo Go** app on your phone, or run on an emulator in the terminal interface:
+
+---
+
+## ✨ Features
+
+- 🔄 Real-time currency conversion
+- 🌍 Support for a wide range of world currencies
+
+---
+
+## 🔌 API
+
+Exchange rates are powered by the free and open-source [Exchange API](https://github.com/fawazahmed0/exchange-api).
+
+- No API key required
+- Updated daily
+- Supports 150+ currencies
+
+---
+
+## 🛠 Tech Stack
+
+| Technology   | Description          |
+| ------------ | -------------------- |
+| React Native | Mobile framework     |
+| Expo         | Development platform |
+| Exchange API | Currency rates data  |
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
