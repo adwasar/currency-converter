@@ -42,9 +42,7 @@ export default function RootLayout() {
 
     const timer = setTimeout(async () => {
       try {
-        const res = await fetch(
-          `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${base}.json`,
-        );
+        const res = await fetch(`https://currency-api.pages.dev/v1/currencies/${base}.json`);
         const data = await res.json();
 
         const rate = data[base][target];
