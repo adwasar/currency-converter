@@ -1,6 +1,6 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useContext, useRef } from 'react';
-import { Keyboard, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { Keyboard, Pressable, StyleSheet, View } from 'react-native';
 
 import AppText from '@/components/AppText';
 import Converter from '@/components/Converter';
@@ -24,25 +24,23 @@ export default function Index() {
   const handlePressBottomSheetSearchInput = () => bottomSheetRef.current?.snapToIndex(2);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <AppText style={styles.headerTitle}>Currency Converter</AppText>
-          <AppText style={styles.headerSubTitle}>
-            Check live rates, set rate alerts, receive notifications and more.
-          </AppText>
-        </View>
-        <View style={styles.mainContainer}>
-          <Converter handleOpenCurrencyPicker={handleOpenCurrencyPicker} />
-        </View>
-        <View style={styles.footerContainer}></View>
-        <CurrencyBottomSheet
-          handleCloseCurrencyPicker={handleCloseCurrencyPicker}
-          bottomSheetRef={bottomSheetRef}
-          handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput}
-        />
+    <Pressable style={styles.container} onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.headerContainer}>
+        <AppText style={styles.headerTitle}>Currency Converter</AppText>
+        <AppText style={styles.headerSubTitle}>
+          Check live rates, set rate alerts, receive notifications and more.
+        </AppText>
       </View>
-    </TouchableWithoutFeedback>
+      <View style={styles.mainContainer}>
+        <Converter handleOpenCurrencyPicker={handleOpenCurrencyPicker} />
+      </View>
+      <View style={styles.footerContainer}></View>
+      <CurrencyBottomSheet
+        handleCloseCurrencyPicker={handleCloseCurrencyPicker}
+        bottomSheetRef={bottomSheetRef}
+        handlePressBottomSheetSearchInput={handlePressBottomSheetSearchInput}
+      />
+    </Pressable>
   );
 }
 
