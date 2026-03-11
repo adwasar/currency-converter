@@ -24,7 +24,7 @@ export default function Index() {
   const handlePressBottomSheetSearchInput = () => bottomSheetRef.current?.snapToIndex(2);
 
   return (
-    <Pressable style={styles.container} onPress={Keyboard.dismiss} accessible={false}>
+    <Pressable style={[styles.container, { cursor: 'default' } as any]} onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.headerContainer}>
         <AppText style={styles.headerTitle}>Currency Converter</AppText>
         <AppText style={styles.headerSubTitle}>

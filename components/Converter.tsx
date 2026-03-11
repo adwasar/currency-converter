@@ -67,26 +67,17 @@ export default function Converter({ handleOpenCurrencyPicker }: Props) {
         handleOpenCurrencyPicker={() => handleOpenCurrencyPicker('target')}
         amount={targetCurrency.amount}
       />
-      <View style={styles.switchBtmContainer}>
-        <SwitchBtn />
-      </View>
+      <SwitchBtn />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   converter: {
-    position: 'relative',
     padding: 24,
     backgroundColor: '#fff',
     borderRadius: 18,
     gap: 32,
-  },
-  switchBtmContainer: {
-    position: 'absolute',
-    inset: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   splitter: {
     width: '100%',

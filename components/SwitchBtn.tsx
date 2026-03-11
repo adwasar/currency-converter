@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { useContext } from 'react';
-import { Pressable, StyleSheet } from 'react-native';
+import { Platform, Pressable, StyleSheet } from 'react-native';
 
 import CurrencyContext from '@/context/CurrencyContext';
 
@@ -23,8 +23,19 @@ export default function SwitchBtn() {
 
 const styles = StyleSheet.create({
   button: {
+    position: 'absolute',
+    top: '50%',
+    alignSelf: 'center',
     width: 55,
     height: 55,
+    ...Platform.select({
+      web: {
+        transform: [{ translateY: -55 / 2 }],
+      },
+      default: {
+        transform: [{ translateY: -4 }],
+      },
+    }),
   },
   image: {
     width: '100%',
