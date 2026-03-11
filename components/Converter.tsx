@@ -14,12 +14,14 @@ export default function Converter({ handleOpenCurrencyPicker }: Props) {
   const { baseCurrency, setBaseCurrency, targetCurrency } = useContext(CurrencyContext)!;
 
   const handleChange = (text: string) => {
-    const parts = text.split('.');
+    let filtered = text.replace(/[^0-9.]/g, '');
+
+    const parts = filtered.split('.');
     if (parts.length > 2) {
-      text = parts[0] + '.' + parts.slice(1).join('');
+      filtered = parts[0] + '.' + parts.slice(1).join('');
     }
 
-    setBaseCurrency({ ...baseCurrency, amount: text });
+    setBaseCurrency({ ...baseCurrency, amount: filtered });
   };
 
   const handleFocus = () => {

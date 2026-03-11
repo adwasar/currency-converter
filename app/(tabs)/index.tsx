@@ -1,6 +1,6 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useContext, useRef } from 'react';
-import { Keyboard, Pressable, StyleSheet, View } from 'react-native';
+import { Keyboard, Platform, Pressable, StyleSheet, View } from 'react-native';
 
 import AppText from '@/components/AppText';
 import Converter from '@/components/Converter';
@@ -23,8 +23,18 @@ export default function Index() {
   };
   const handlePressBottomSheetSearchInput = () => bottomSheetRef.current?.snapToIndex(2);
 
+  const handlePressContainer = () => {
+    if (Platform.OS !== 'web') {
+      Keyboard.dismiss();
+    }
+  };
+
   return (
-    <Pressable style={[styles.container, { cursor: 'default' } as any]} onPress={Keyboard.dismiss} accessible={false}>
+    <Pressable
+      style={[styles.container, { cursor: 'default' } as any]}
+      onPress={handlePressContainer}
+      accessible={false}
+    >
       <View style={styles.headerContainer}>
         <AppText style={styles.headerTitle}>Currency Converter</AppText>
         <AppText style={styles.headerSubTitle}>
