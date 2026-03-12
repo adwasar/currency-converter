@@ -1,6 +1,6 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { Image } from 'expo-image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import BottomSheetSearchInput from './BottomSheetSearchInput';
@@ -20,6 +20,13 @@ export default function CurrencyBottomSheet({
   handlePressBottomSheetSearchInput,
 }: Props) {
   const [inputValue, setInputValue] = useState<string>('');
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const handleChange = (value: string) => {
     setInputValue(value);
