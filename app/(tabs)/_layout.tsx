@@ -58,6 +58,7 @@ export default function RootLayout() {
               style={{ width: 19, height: 19 }}
             />
           ),
+          href: null,
         }}
       />
       <Tabs.Screen

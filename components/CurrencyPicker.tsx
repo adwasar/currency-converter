@@ -23,7 +23,7 @@ export default function CurrencyPicker({ openCurrencyBottomSheet, type }: Props)
     <Pressable style={styles.currencyPicker} onPress={openCurrencyBottomSheet}>
       <Image style={styles.icon} source={iconSource} />
       <AppText style={styles.text}>{currencySelected.title}</AppText>
-      <Image style={styles.arrow} source={require('@/assets/images/arrow-bottom.svg')} />
+      <Image style={styles.arrow} source={require('@/assets/images/arrow.svg')} />
     </Pressable>
   );
 }
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   arrow: {
+    aspectRatio: 12 / 8,
     width: 12,
-    height: 7,
   },
 });

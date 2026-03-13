@@ -6,13 +6,18 @@ import { useEffect, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import CurrencyContext from '@/context/CurrencyContext';
+import SettingsContext from '@/context/SettingsContext';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const [theme, setTheme] = useState<'Light' | 'Dark'>('Light');
+  const [language, setLanguage] = useState<'English' | 'Spanish' | 'French'>('English');
   const [currentPickerType, setCurrentPickerType] = useState<'base' | 'target'>('base');
   const [baseCurrency, setBaseCurrency] = useState({ title: 'EUR', amount: '1.00' });
   const [targetCurrency, setTargetCurrency] = useState({ title: 'USD', amount: '0.00' });
+
+  const settingsContextValue = { theme, setTheme, language, setLanguage };
 
   const currencyContextValue = {
     currentPickerType,
@@ -73,13 +78,21 @@ export default function RootLayout() {
   }, [baseCurrency.title, baseCurrency.amount, targetCurrency.title]);
 
   return (
-    <CurrencyContext value={currencyContextValue}>
-      <GestureHandlerRootView>
-        <StatusBar style="dark" />
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }}></Stack.Screen>
-        </Stack>
-      </GestureHandlerRootView>
-    </CurrencyContext>
+    <SettingsContext value={settingsContextValue}>
+      <CurrencyContext value={currencyContextValue}>
+        <GestureHandlerRootView>
+          <StatusBar style="dark" />
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }}></Stack.Screen>
+            <Stack.Screen
+              name="option-picker"
+              options={{
+                headerBackButtonDisplayMode: 'minimal',
+              }}
+            />
+          </Stack>
+        </GestureHandlerRootView>
+      </CurrencyContext>
+    </SettingsContext>
   );
 }

@@ -1,9 +1,48 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image } from 'expo-image';
+import { useRouter } from 'expo-router';
+import { useContext } from 'react';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+
+import AppText from '@/components/AppText';
+
+import SettingsContext from '@/context/SettingsContext';
 
 export default function Setting() {
+  const { theme, language } = useContext(SettingsContext)!;
+
+  const items = [
+    { title: 'Theme', value: theme, options: ['Light', 'Dark'] },
+    { title: 'Language', value: language, options: ['English', 'Spanish', 'French'] },
+  ];
+
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
-      <Text></Text>
+      <FlatList
+        data={items}
+        style={styles.list}
+        renderItem={({ item }) => (
+          <Pressable
+            style={styles.listItem}
+            onPress={() =>
+              router.push({
+                pathname: '/option-picker',
+                params: {
+                  title: item.title,
+                  options: JSON.stringify(item.options),
+                },
+              })
+            }
+          >
+            <View>
+              <AppText style={styles.itemTitle}>{item.title}</AppText>
+              <AppText style={styles.itemValue}>{item.value}</AppText>
+            </View>
+            <Image style={styles.arrow} source={require('@/assets/images/arrow.svg')} />
+          </Pressable>
+        )}
+      />
     </View>
   );
 }
@@ -13,5 +52,32 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  list: {
+    marginTop: 16,
+    width: '100%',
+  },
+  listItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderColor: '#E4E1E1',
+  },
+  itemTitle: {
+    fontSize: 16,
+    color: '#141414',
+  },
+  itemValue: {
+    marginTop: 4,
+    fontSize: 14,
+    color: '#5E5C5C',
+  },
+  arrow: {
+    transform: [{ rotate: '-90deg' }],
+    width: 19,
+    height: 12,
   },
 });
