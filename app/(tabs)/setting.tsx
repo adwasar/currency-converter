@@ -22,6 +22,7 @@ export default function Setting() {
       <FlatList
         data={items}
         style={styles.list}
+        keyExtractor={(item) => item.title}
         renderItem={({ item }) => (
           <Pressable
             style={styles.listItem}

@@ -15,56 +15,42 @@ export default function OptionPicker() {
 
   const { title, options } = useLocalSearchParams<{
     title: string;
-    options: LanguageType | ThemeType;
+    options: string;
   }>();
 
-  if (title === 'Theme') {
-    const parsedOptions = JSON.parse(options ?? '[]') as ThemeType[];
-    return (
-      <>
-        <Stack.Screen options={{ title }} />
-        <View style={styles.container}>
-          <View style={styles.list}>
-            {parsedOptions.map((option) => {
-              const isSelected = theme === option;
-              return (
-                <Pressable style={styles.listItem} key={option} onPress={() => setTheme(option)}>
-                  <AppText style={styles.itemTitle} key={option}>
-                    {option}
-                  </AppText>
-                  {isSelected && <Image style={styles.checkIcon} source={require('@/assets/images/check-icon.svg')} />}
-                </Pressable>
-              );
-            })}
-          </View>
-        </View>
-      </>
-    );
-  }
+  const parsedOptions = JSON.parse(options ?? '[]') as (ThemeType | LanguageType)[];
 
-  if (title === 'Language') {
-    const parsedOptions = JSON.parse(options ?? '[]') as LanguageType[];
-    return (
-      <>
-        <Stack.Screen options={{ title }} />
-        <View style={styles.container}>
-          <View style={styles.list}>
-            {parsedOptions.map((option) => {
-              const isSelected = language === option;
-              return (
-                <Pressable style={styles.listItem} key={option} onPress={() => setLanguage(option)}>
-                  <AppText style={styles.itemTitle} key={option}>
-                    {option}
-                  </AppText>
-                  {isSelected && <Image style={styles.checkIcon} source={require('@/assets/images/check-icon.svg')} />}
-                </Pressable>
-              );
-            })}
-          </View>
+  const selectedValue: ThemeType | LanguageType = title === 'Theme' ? theme : language;
+
+  const setValue = (value: ThemeType | LanguageType) => {
+    switch (title) {
+      case 'Theme':
+        setTheme(value as ThemeType);
+        break;
+      case 'Language':
+        setLanguage(value as LanguageType);
+        break;
+    }
+  };
+
+  return (
+    <>
+      <Stack.Screen options={{ title }} />
+      <View style={styles.container}>
+        <View style={styles.list}>
+          {parsedOptions.map((option) => {
+            const isSelected = selectedValue === option;
+            return (
+              <Pressable key={option} style={styles.listItem} onPress={() => setValue(option)}>
+                <AppText style={styles.itemTitle}>{option}</AppText>
+                {isSelected && <Image style={styles.checkIcon} source={require('@/assets/images/check-icon.svg')} />}
+              </Pressable>
+            );
+          })}
         </View>
-      </>
-    );
-  }
+      </View>
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
