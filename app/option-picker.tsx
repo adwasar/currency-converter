@@ -7,17 +7,19 @@ import SettingsContext from '@/context/SettingsContext';
 
 import AppText from '@/components/AppText';
 
+type ThemeType = 'Light' | 'Dark';
+type LanguageType = 'English' | 'Spanish' | 'French';
+
 export default function OptionPicker() {
   const { theme, setTheme, language, setLanguage } = useContext(SettingsContext)!;
 
   const { title, options } = useLocalSearchParams<{
     title: string;
-    options: string;
+    options: LanguageType | ThemeType;
   }>();
 
-  const parsedOptions = JSON.parse(options ?? '[]') as string[];
-
   if (title === 'Theme') {
+    const parsedOptions = JSON.parse(options ?? '[]') as ThemeType[];
     return (
       <>
         <Stack.Screen options={{ title }} />
@@ -41,6 +43,7 @@ export default function OptionPicker() {
   }
 
   if (title === 'Language') {
+    const parsedOptions = JSON.parse(options ?? '[]') as LanguageType[];
     return (
       <>
         <Stack.Screen options={{ title }} />
