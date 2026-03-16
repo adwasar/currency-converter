@@ -1,17 +1,16 @@
-import { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import ConverterSection from './ConverterSection';
 import SwitchBtn from './SwitchBtn';
 
-import CurrencyContext from '@/context/CurrencyContext';
+import { useCurrency } from '@/context/CurrencyContext';
 
 interface Props {
   handleOpenCurrencyPicker: (type: 'base' | 'target') => void;
 }
 
 export default function Converter({ handleOpenCurrencyPicker }: Props) {
-  const { baseCurrency, setBaseCurrency, targetCurrency } = useContext(CurrencyContext)!;
+  const { baseCurrency, setBaseCurrency, targetCurrency } = useCurrency();
 
   const handleChange = (text: string) => {
     let filtered = text.replace(/[^0-9.]/g, '');

@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
 interface SettingsContextType {
   theme: 'Light' | 'Dark';
@@ -8,5 +8,13 @@ interface SettingsContextType {
 }
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
+
+export function useSettings() {
+  const context = useContext(SettingsContext);
+  if (!context) {
+    throw new Error('useSettings must be used within a SettingsContext provider');
+  }
+  return context;
+}
 
 export default SettingsContext;

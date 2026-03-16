@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
 interface Currency {
   title: string;
@@ -15,5 +15,13 @@ interface CurrencyContextType {
 }
 
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
+
+export function useCurrency() {
+  const context = useContext(CurrencyContext);
+  if (!context) {
+    throw new Error('useCurrency must be used within a CurrencyContext provider');
+  }
+  return context;
+}
 
 export default CurrencyContext;

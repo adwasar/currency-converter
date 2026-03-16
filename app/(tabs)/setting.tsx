@@ -1,14 +1,13 @@
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
-import { useContext } from 'react';
 import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 
 import AppText from '@/components/AppText';
 
-import SettingsContext from '@/context/SettingsContext';
+import { useSettings } from '@/context/SettingsContext';
 
 export default function Setting() {
-  const { theme, language } = useContext(SettingsContext)!;
+  const { theme, language } = useSettings();
 
   const items = [
     { title: 'Theme', value: theme, options: ['Light', 'Dark'] },

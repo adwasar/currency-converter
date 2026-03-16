@@ -1,9 +1,8 @@
 import { Image } from 'expo-image';
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { useContext } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import SettingsContext from '@/context/SettingsContext';
+import { useSettings } from '@/context/SettingsContext';
 
 import AppText from '@/components/AppText';
 
@@ -11,7 +10,7 @@ type ThemeType = 'Light' | 'Dark';
 type LanguageType = 'English' | 'Spanish' | 'French';
 
 export default function OptionPicker() {
-  const { theme, setTheme, language, setLanguage } = useContext(SettingsContext)!;
+  const { theme, setTheme, language, setLanguage } = useSettings();
 
   const { title, options } = useLocalSearchParams<{
     title: string;

@@ -1,13 +1,12 @@
 import { Image } from 'expo-image';
-import { useContext } from 'react';
 import { Platform, Pressable, StyleSheet } from 'react-native';
 
-import CurrencyContext from '@/context/CurrencyContext';
+import { useCurrency } from '@/context/CurrencyContext';
 
 const icon = require('@/assets/images/switch-currency-icon.png');
 
 export default function SwitchBtn() {
-  const { baseCurrency, setBaseCurrency, targetCurrency, setTargetCurrency } = useContext(CurrencyContext)!;
+  const { baseCurrency, setBaseCurrency, targetCurrency, setTargetCurrency } = useCurrency();
 
   const handlePress = () => {
     setBaseCurrency({ ...targetCurrency, amount: baseCurrency.amount });

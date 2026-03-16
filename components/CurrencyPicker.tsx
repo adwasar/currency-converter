@@ -1,12 +1,11 @@
 import { Image } from 'expo-image';
-import { useContext } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 
 import AppText from './AppText';
 
 import currencyItems from '@/data/currencies';
 
-import CurrencyContext from '@/context/CurrencyContext';
+import { useCurrency } from '@/context/CurrencyContext';
 
 interface Props {
   openCurrencyBottomSheet: () => void;
@@ -14,7 +13,7 @@ interface Props {
 }
 
 export default function CurrencyPicker({ openCurrencyBottomSheet, type }: Props) {
-  const { baseCurrency, targetCurrency } = useContext(CurrencyContext)!;
+  const { baseCurrency, targetCurrency } = useCurrency();
 
   const currencySelected = type === 'base' ? baseCurrency : targetCurrency;
   const iconSource = currencyItems.find((item) => item.title === currencySelected.title)?.img;

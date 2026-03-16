@@ -1,15 +1,15 @@
 import BottomSheet from '@gorhom/bottom-sheet';
-import { useContext, useRef } from 'react';
+import { useRef } from 'react';
 import { Keyboard, Platform, Pressable, StyleSheet, View } from 'react-native';
 
 import AppText from '@/components/AppText';
 import Converter from '@/components/Converter';
 import CurrencyBottomSheet from '@/components/CurrencyBottomSheet';
 
-import CurrencyContext from '@/context/CurrencyContext';
+import { useCurrency } from '@/context/CurrencyContext';
 
 export default function Index() {
-  const { setCurrentPickerType } = useContext(CurrencyContext)!;
+  const { setCurrentPickerType } = useCurrency();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
