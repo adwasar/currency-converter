@@ -26,7 +26,7 @@ export default function ConverterSection({
     <View>
       <AppText style={styles.text}>{title}</AppText>
       <View style={styles.sectionRow}>
-        <CurrencyPicker openCurrencyBottomSheet={handleOpenCurrencyPicker} type={type} />
+        <CurrencyPicker handleOpenCurrencyPicker={handleOpenCurrencyPicker} type={type} />
         <TextInput
           style={styles.input}
           value={amount}

@@ -8,18 +8,18 @@ import currencyItems from '@/data/currencies';
 import { useCurrency } from '@/context/CurrencyContext';
 
 interface Props {
-  openCurrencyBottomSheet: () => void;
+  handleOpenCurrencyPicker: () => void;
   type: 'base' | 'target';
 }
 
-export default function CurrencyPicker({ openCurrencyBottomSheet, type }: Props) {
+export default function CurrencyPicker({ handleOpenCurrencyPicker, type }: Props) {
   const { baseCurrency, targetCurrency } = useCurrency();
 
   const currencySelected = type === 'base' ? baseCurrency : targetCurrency;
   const iconSource = currencyItems.find((item) => item.title === currencySelected.title)?.img;
 
   return (
-    <Pressable style={styles.currencyPicker} onPress={openCurrencyBottomSheet}>
+    <Pressable style={styles.currencyPicker} onPress={handleOpenCurrencyPicker}>
       <Image style={styles.icon} source={iconSource} />
       <AppText style={styles.text}>{currencySelected.title}</AppText>
       <Image style={styles.arrow} source={require('@/assets/images/arrow.svg')} />

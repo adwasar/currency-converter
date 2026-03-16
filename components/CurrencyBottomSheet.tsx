@@ -38,7 +38,6 @@ export default function CurrencyBottomSheet({
       ref={bottomSheetRef}
       snapPoints={['35%', '70%']}
       maxDynamicContentSize={0}
-      index={-1}
       enableContentPanningGesture={false}
       handleComponent={() => (
         <View style={styles.handlerContainer}>
