@@ -5,6 +5,8 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+import { convertCurrency } from '@/services/rates';
+
 import CurrencyContext from '@/context/CurrencyContext';
 import SettingsContext from '@/context/SettingsContext';
 
@@ -44,35 +46,15 @@ export default function RootLayout() {
     const target = targetCurrency.title.toLowerCase();
     const amount = Number(baseCurrency.amount);
 
-    const urls = [
-      `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${base}.min.json`,
-      `https://latest.currency-api.pages.dev/v1/currencies/${base}.min.json`,
-      `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${base}.json`,
-      `https://latest.currency-api.pages.dev/v1/currencies/${base}.json`,
-    ];
-
     const timer = setTimeout(async () => {
-      for (let url of urls) {
-        try {
-          const res = await fetch(url);
-          if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-          const data = await res.json();
+      const convertedAmount = await convertCurrency(base, target, amount);
 
-          const rate = data[base]?.[target];
-          if (rate == null) throw new Error(`Rate not found for ${target}`);
-
-          const calculated = (rate * amount).toFixed(2);
-          setTargetCurrency((prev) => ({
-            ...prev,
-            amount: calculated,
-          }));
-          return;
-        } catch (err) {
-          console.warn(`Failed to fetch from ${url}:`, err);
-        }
-      }
-      console.error('All currency API requests failed');
+      setTargetCurrency((prev) => ({
+        ...prev,
+        amount: convertedAmount,
+      }));
     }, 400);
+
 
     return () => clearTimeout(timer);
   }, [baseCurrency.title, baseCurrency.amount, targetCurrency.title]);
