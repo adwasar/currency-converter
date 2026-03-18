@@ -55,7 +55,6 @@ export default function RootLayout() {
       }));
     }, 400);
 
-
     return () => clearTimeout(timer);
   }, [baseCurrency.title, baseCurrency.amount, targetCurrency.title]);
 
@@ -63,15 +62,10 @@ export default function RootLayout() {
     <SettingsContext value={settingsContextValue}>
       <CurrencyContext value={currencyContextValue}>
         <GestureHandlerRootView>
-          <StatusBar style="dark" />
+          <StatusBar style={theme === 'Dark' ? 'light' : 'dark'} />
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen
-              name="option-picker"
-              options={{
-                headerBackButtonDisplayMode: 'minimal',
-              }}
-            />
+            <Stack.Screen name="option-picker" />
           </Stack>
         </GestureHandlerRootView>
       </CurrencyContext>

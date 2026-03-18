@@ -4,6 +4,8 @@ import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 
 import AppText from '@/components/AppText';
 
+import { useThemeColors } from '@/hooks/useThemeColors';
+
 import { useSettings } from '@/context/SettingsContext';
 
 export default function Setting() {
@@ -11,10 +13,15 @@ export default function Setting() {
 
   const items = [
     { title: 'Theme', value: theme, options: ['Light', 'Dark'] },
-    { title: 'Language', value: language, options: ['English', 'Spanish', 'French'] },
+    { title: 'Language', value: language, options: ['English'] },
   ];
 
   const router = useRouter();
+
+  const colors = useThemeColors();
+
+  const arrowIcon =
+    theme === 'Dark' ? require('@/assets/images/arrow-white.svg') : require('@/assets/images/arrow.svg');
 
   return (
     <View style={styles.container}>
@@ -24,7 +31,7 @@ export default function Setting() {
         keyExtractor={(item) => item.title}
         renderItem={({ item }) => (
           <Pressable
-            style={styles.listItem}
+            style={[styles.listItem, { borderColor: colors.border }]}
             onPress={() =>
               router.push({
                 pathname: '/option-picker',
@@ -39,7 +46,7 @@ export default function Setting() {
               <AppText style={styles.itemTitle}>{item.title}</AppText>
               <AppText style={styles.itemValue}>{item.value}</AppText>
             </View>
-            <Image style={styles.arrow} source={require('@/assets/images/arrow.svg')} />
+            <Image style={styles.arrow} source={arrowIcon} />
           </Pressable>
         )}
       />
@@ -68,7 +75,6 @@ const styles = StyleSheet.create({
   },
   itemTitle: {
     fontSize: 16,
-    color: '#141414',
   },
   itemValue: {
     marginTop: 4,

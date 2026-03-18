@@ -3,6 +3,8 @@ import { StyleSheet, TextInput, View } from 'react-native';
 import AppText from './AppText';
 import CurrencyPicker from './CurrencyPicker';
 
+import { useThemeColors } from '@/hooks/useThemeColors';
+
 interface Props {
   handleOpenCurrencyPicker: () => void;
   title: string;
@@ -22,13 +24,15 @@ export default function ConverterSection({
   handleFocus,
   amount,
 }: Props) {
+  const colors = useThemeColors();
+
   return (
     <View>
       <AppText style={styles.text}>{title}</AppText>
       <View style={styles.sectionRow}>
         <CurrencyPicker handleOpenCurrencyPicker={handleOpenCurrencyPicker} type={type} />
         <TextInput
-          style={styles.input}
+          style={[styles.input, { backgroundColor: colors.inputBackground, color: colors.inputText }]}
           value={amount}
           keyboardType="numeric"
           onChangeText={handleChange}

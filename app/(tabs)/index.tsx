@@ -6,10 +6,14 @@ import AppText from '@/components/AppText';
 import Converter from '@/components/Converter';
 import CurrencyBottomSheet from '@/components/CurrencyBottomSheet';
 
+import { useThemeColors } from '@/hooks/useThemeColors';
+
 import { useCurrency } from '@/context/CurrencyContext';
 
 export default function Index() {
   const { setCurrentPickerType } = useCurrency();
+
+  const colors = useThemeColors();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -36,8 +40,8 @@ export default function Index() {
       accessible={false}
     >
       <View style={styles.headerContainer}>
-        <AppText style={styles.headerTitle}>Currency Converter</AppText>
-        <AppText style={styles.headerSubTitle}>
+        <AppText style={[styles.headerTitle, { color: colors.title }]}>Currency Converter</AppText>
+        <AppText style={[styles.headerSubTitle, { color: colors.subtitle }]}>
           Check live rates, set rate alerts, receive notifications and more.
         </AppText>
       </View>
@@ -59,7 +63,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F6F6F6',
   },
   headerContainer: {
     paddingTop: 64,

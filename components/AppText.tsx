@@ -1,9 +1,11 @@
 import React from 'react';
-import { Text, TextStyle } from 'react-native';
+import { StyleProp, StyleSheet, Text, TextStyle } from 'react-native';
+
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface Props {
   children: React.ReactNode;
-  style?: TextStyle;
+  style?: StyleProp<TextStyle>;
 }
 
 const getFontFamily = (fontWeight: TextStyle['fontWeight']) => {
@@ -15,7 +17,10 @@ const getFontFamily = (fontWeight: TextStyle['fontWeight']) => {
 };
 
 export default function AppText({ style, children }: Props) {
-  const fontFamily = getFontFamily(style?.fontWeight);
+  const colors = useThemeColors();
 
-  return <Text style={[{ fontFamily: fontFamily }, style]}>{children}</Text>;
+  const flatStyle = StyleSheet.flatten(style);
+  const fontFamily = getFontFamily(flatStyle?.fontWeight);
+
+  return <Text style={[{ fontFamily, color: colors.text }, style]}>{children}</Text>;
 }

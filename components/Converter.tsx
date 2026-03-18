@@ -3,6 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import ConverterSection from './ConverterSection';
 import SwitchBtn from './SwitchBtn';
 
+import { useThemeColors } from '@/hooks/useThemeColors';
+
 import { useCurrency } from '@/context/CurrencyContext';
 
 interface Props {
@@ -11,6 +13,8 @@ interface Props {
 
 export default function Converter({ handleOpenCurrencyPicker }: Props) {
   const { baseCurrency, setBaseCurrency, targetCurrency } = useCurrency();
+
+  const colors = useThemeColors();
 
   const handleChange = (text: string) => {
     let filtered = text.replace(/[^0-9.]/g, '');
@@ -51,7 +55,7 @@ export default function Converter({ handleOpenCurrencyPicker }: Props) {
   };
 
   return (
-    <View style={styles.converter}>
+    <View style={[styles.converter, { backgroundColor: colors.blockBackground }]}>
       <ConverterSection
         title="Amount"
         type="base"
@@ -61,7 +65,7 @@ export default function Converter({ handleOpenCurrencyPicker }: Props) {
         handleFocus={handleFocus}
         amount={baseCurrency.amount}
       />
-      <View style={styles.splitter}></View>
+      <View style={[styles.splitter, { backgroundColor: colors.border }]}></View>
       <ConverterSection
         title="Converted Amount"
         type="target"

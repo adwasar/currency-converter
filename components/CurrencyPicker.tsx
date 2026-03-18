@@ -6,6 +6,7 @@ import AppText from './AppText';
 import currencyItems from '@/data/currencies';
 
 import { useCurrency } from '@/context/CurrencyContext';
+import { useSettings } from '@/context/SettingsContext';
 
 interface Props {
   handleOpenCurrencyPicker: () => void;
@@ -14,6 +15,10 @@ interface Props {
 
 export default function CurrencyPicker({ handleOpenCurrencyPicker, type }: Props) {
   const { baseCurrency, targetCurrency } = useCurrency();
+  const { theme } = useSettings();
+
+  const arrowIcon =
+    theme === 'Dark' ? require('@/assets/images/arrow-white.svg') : require('@/assets/images/arrow.svg');
 
   const currencySelected = type === 'base' ? baseCurrency : targetCurrency;
   const iconSource = currencyItems.find((item) => item.title === currencySelected.title)?.img;
@@ -21,8 +26,10 @@ export default function CurrencyPicker({ handleOpenCurrencyPicker, type }: Props
   return (
     <Pressable style={styles.currencyPicker} onPress={handleOpenCurrencyPicker}>
       <Image style={styles.icon} source={iconSource} />
-      <AppText style={styles.text}>{currencySelected.title}</AppText>
-      <Image style={styles.arrow} source={require('@/assets/images/arrow.svg')} />
+      <AppText style={[styles.text, { color: theme === 'Dark' ? '#4548ee' : '#26278D' }]}>
+        {currencySelected.title}
+      </AppText>
+      <Image style={styles.arrow} source={arrowIcon} />
     </Pressable>
   );
 }
@@ -39,7 +46,6 @@ const styles = StyleSheet.create({
     height: 30,
   },
   text: {
-    color: '#26278D',
     fontWeight: '500',
     fontSize: 16,
   },

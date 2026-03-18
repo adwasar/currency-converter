@@ -6,7 +6,9 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import BottomSheetSearchInput from './BottomSheetSearchInput';
 import CurrencyList from './CurrencyList';
 
-const closeBtnIcon = require('@/assets/images/close-btn.svg');
+import { useThemeColors } from '@/hooks/useThemeColors';
+
+import { useSettings } from '@/context/SettingsContext';
 
 interface Props {
   handleCloseCurrencyPicker: () => void;
@@ -21,6 +23,13 @@ export default function CurrencyBottomSheet({
 }: Props) {
   const [inputValue, setInputValue] = useState<string>('');
   const [mounted, setMounted] = useState<boolean>(false);
+
+  const { theme } = useSettings();
+
+  const colors = useThemeColors();
+
+  const closeBtnIcon =
+    theme === 'Dark' ? require('@/assets/images/close-btn-white.svg') : require('@/assets/images/close-btn.svg');
 
   useEffect(() => {
     setMounted(true);
@@ -39,8 +48,9 @@ export default function CurrencyBottomSheet({
       snapPoints={['35%', '70%']}
       maxDynamicContentSize={0}
       enableContentPanningGesture={false}
+      backgroundStyle={{ backgroundColor: colors.blockBackground }}
       handleComponent={() => (
-        <View style={styles.handlerContainer}>
+        <View style={[styles.handlerContainer, { backgroundColor: colors.blockBackground }]}>
           <View style={styles.handlerIndicator} />
           <Pressable style={styles.modalBtnClose} onPress={handleCloseCurrencyPicker}>
             <Image style={styles.modalBtnCloseImage} source={closeBtnIcon} contentFit="cover" />

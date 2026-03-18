@@ -1,6 +1,8 @@
 import { Image } from 'expo-image';
 import { StyleSheet, TextInput, View } from 'react-native';
 
+import { useThemeColors } from '@/hooks/useThemeColors';
+
 const icon = require('@/assets/images/search-icon.svg');
 
 interface Props {
@@ -10,11 +12,13 @@ interface Props {
 }
 
 export default function BottomSheetSearchInput({ handlePressBottomSheetSearchInput, handleChange, inputValue }: Props) {
+  const colors = useThemeColors();
+
   return (
     <View style={styles.container}>
       <Image style={styles.icon} source={icon} contentFit="cover" />
       <TextInput
-        style={styles.input}
+        style={[styles.input, { color: colors.inputText }]}
         onChangeText={handleChange}
         onFocus={handlePressBottomSheetSearchInput}
         value={inputValue}

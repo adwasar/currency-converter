@@ -6,6 +6,7 @@ import currencyItems from '@/data/currencies';
 import AppText from './AppText';
 
 import { useCurrency } from '@/context/CurrencyContext';
+import { useSettings } from '@/context/SettingsContext';
 
 interface Props {
   handleCloseCurrencyPicker: () => void;
@@ -15,6 +16,10 @@ interface Props {
 
 export default function CurrencyList({ handleCloseCurrencyPicker, inputValue, setInputValue }: Props) {
   const { currentPickerType, setBaseCurrency, setTargetCurrency, baseCurrency, targetCurrency } = useCurrency();
+  const { theme } = useSettings();
+
+  const checkIcon =
+    theme === 'Dark' ? require('@/assets/images/check-icon-white.svg') : require('@/assets/images/check-icon.svg');
 
   const handleItemPress = (currency: string) => {
     setInputValue('');
@@ -40,7 +45,7 @@ export default function CurrencyList({ handleCloseCurrencyPicker, inputValue, se
 
   return (
     <BottomSheetFlatList
-      style={styles.list}
+      style={[styles.list]}
       data={filteredCurrencyItems}
       renderItem={({ item }: { item: (typeof currencyItems)[number] }) => {
         const isSelected = item.title === currencySelected.title;
@@ -52,7 +57,7 @@ export default function CurrencyList({ handleCloseCurrencyPicker, inputValue, se
           >
             <Image style={styles.currencyIcon} source={item.img} />
             <AppText style={styles.itemText}>{item.title}</AppText>
-            {isSelected && <Image style={styles.checkIcon} source={require('@/assets/images/check-icon.svg')} />}
+            {isSelected && <Image style={styles.checkIcon} source={checkIcon} />}
           </Pressable>
         );
       }}

@@ -3,6 +3,7 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { useSettings } from '@/context/SettingsContext';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 import AppText from '@/components/AppText';
 
@@ -11,6 +12,10 @@ type LanguageType = 'English' | 'Spanish' | 'French';
 
 export default function OptionPicker() {
   const { theme, setTheme, language, setLanguage } = useSettings();
+  const colors = useThemeColors();
+
+  const checkIcon =
+    theme === 'Dark' ? require('@/assets/images/check-icon-white.svg') : require('@/assets/images/check-icon.svg');
 
   const { title, options } = useLocalSearchParams<{
     title: string;
@@ -34,15 +39,33 @@ export default function OptionPicker() {
 
   return (
     <>
-      <Stack.Screen options={{ title }} />
-      <View style={styles.container}>
+      <Stack.Screen
+        options={{
+          title,
+          headerBackButtonDisplayMode: 'minimal',
+          headerStyle: {
+            backgroundColor: colors.headerBackground,
+          },
+          headerTitleStyle: {
+            fontFamily: 'SFPro-Medium',
+            fontSize: 22,
+          },
+          headerTintColor: colors.header,
+          headerShadowVisible: theme === 'Dark' ? false : true,
+        }}
+      />
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
         <View style={styles.list}>
           {parsedOptions.map((option) => {
             const isSelected = selectedValue === option;
             return (
-              <Pressable key={option} style={styles.listItem} onPress={() => setValue(option)}>
+              <Pressable
+                key={option}
+                style={[styles.listItem, { borderColor: colors.border }]}
+                onPress={() => setValue(option)}
+              >
                 <AppText style={styles.itemTitle}>{option}</AppText>
-                {isSelected && <Image style={styles.checkIcon} source={require('@/assets/images/check-icon.svg')} />}
+                {isSelected && <Image style={styles.checkIcon} source={checkIcon} />}
               </Pressable>
             );
           })}
@@ -68,11 +91,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     borderBottomWidth: 1,
-    borderColor: '#E4E1E1',
   },
   itemTitle: {
     fontSize: 16,
-    color: '#141414',
   },
   checkIcon: {
     marginLeft: 'auto',
