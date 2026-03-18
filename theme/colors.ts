@@ -12,6 +12,7 @@ export const lightColors = {
   blockBackground: '#fff',
   inputBackground: '#f2f2f2',
   inputText: '#4E4E4E',
+  icon: '#141414',
 };
 
 export const darkColors = {
@@ -28,4 +29,5 @@ export const darkColors = {
   blockBackground: '#181818',
   inputBackground: '#212121',
   inputText: '#c8c8c8',
+  icon: '#fff',
 };

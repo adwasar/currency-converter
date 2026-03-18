@@ -6,13 +6,11 @@ import AppText from '@/components/AppText';
 import Converter from '@/components/Converter';
 import CurrencyBottomSheet from '@/components/CurrencyBottomSheet';
 
-import { useThemeColors } from '@/hooks/useThemeColors';
-
 import { useCurrency } from '@/context/CurrencyContext';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 export default function Index() {
   const { setCurrentPickerType } = useCurrency();
-
   const colors = useThemeColors();
 
   const bottomSheetRef = useRef<BottomSheet>(null);

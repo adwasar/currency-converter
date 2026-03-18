@@ -1,11 +1,11 @@
-import { Image } from 'expo-image';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
+import AppText from '@/components/AppText';
+import CheckIcon from '@/components/icons/CheckIcon';
+
 import { useSettings } from '@/context/SettingsContext';
 import { useThemeColors } from '@/hooks/useThemeColors';
-
-import AppText from '@/components/AppText';
 
 type ThemeType = 'Light' | 'Dark';
 type LanguageType = 'English' | 'Spanish' | 'French';
@@ -13,9 +13,6 @@ type LanguageType = 'English' | 'Spanish' | 'French';
 export default function OptionPicker() {
   const { theme, setTheme, language, setLanguage } = useSettings();
   const colors = useThemeColors();
-
-  const checkIcon =
-    theme === 'Dark' ? require('@/assets/images/check-icon-white.svg') : require('@/assets/images/check-icon.svg');
 
   const { title, options } = useLocalSearchParams<{
     title: string;
@@ -65,7 +62,7 @@ export default function OptionPicker() {
                 onPress={() => setValue(option)}
               >
                 <AppText style={styles.itemTitle}>{option}</AppText>
-                {isSelected && <Image style={styles.checkIcon} source={checkIcon} />}
+                {isSelected && <CheckIcon color={colors.icon} />}
               </Pressable>
             );
           })}

@@ -1,27 +1,22 @@
-import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 
 import AppText from '@/components/AppText';
-
-import { useThemeColors } from '@/hooks/useThemeColors';
+import ArrowIcon from '@/components/icons/ArrowIcon';
 
 import { useSettings } from '@/context/SettingsContext';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 export default function Setting() {
   const { theme, language } = useSettings();
+  const colors = useThemeColors();
+
+  const router = useRouter();
 
   const items = [
     { title: 'Theme', value: theme, options: ['Light', 'Dark'] },
     { title: 'Language', value: language, options: ['English'] },
   ];
-
-  const router = useRouter();
-
-  const colors = useThemeColors();
-
-  const arrowIcon =
-    theme === 'Dark' ? require('@/assets/images/arrow-white.svg') : require('@/assets/images/arrow.svg');
 
   return (
     <View style={styles.container}>
@@ -46,7 +41,7 @@ export default function Setting() {
               <AppText style={styles.itemTitle}>{item.title}</AppText>
               <AppText style={styles.itemValue}>{item.value}</AppText>
             </View>
-            <Image style={styles.arrow} source={arrowIcon} />
+            <ArrowIcon style={styles.arrow} color={colors.icon} />
           </Pressable>
         )}
       />

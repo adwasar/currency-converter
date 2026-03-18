@@ -2,11 +2,13 @@ import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { Image } from 'expo-image';
 import { Pressable, StyleSheet } from 'react-native';
 
-import currencyItems from '@/data/currencies';
+import CheckIcon from '@/components/icons/CheckIcon';
 import AppText from './AppText';
 
+import currencyItems from '@/data/currencies';
+
 import { useCurrency } from '@/context/CurrencyContext';
-import { useSettings } from '@/context/SettingsContext';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface Props {
   handleCloseCurrencyPicker: () => void;
@@ -16,10 +18,7 @@ interface Props {
 
 export default function CurrencyList({ handleCloseCurrencyPicker, inputValue, setInputValue }: Props) {
   const { currentPickerType, setBaseCurrency, setTargetCurrency, baseCurrency, targetCurrency } = useCurrency();
-  const { theme } = useSettings();
-
-  const checkIcon =
-    theme === 'Dark' ? require('@/assets/images/check-icon-white.svg') : require('@/assets/images/check-icon.svg');
+  const colors = useThemeColors();
 
   const handleItemPress = (currency: string) => {
     setInputValue('');
@@ -57,7 +56,7 @@ export default function CurrencyList({ handleCloseCurrencyPicker, inputValue, se
           >
             <Image style={styles.currencyIcon} source={item.img} />
             <AppText style={styles.itemText}>{item.title}</AppText>
-            {isSelected && <Image style={styles.checkIcon} source={checkIcon} />}
+            {isSelected && <CheckIcon style={styles.checkIcon} color={colors.icon} />}
           </Pressable>
         );
       }}

@@ -6,9 +6,8 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import BottomSheetSearchInput from './BottomSheetSearchInput';
 import CurrencyList from './CurrencyList';
 
-import { useThemeColors } from '@/hooks/useThemeColors';
-
 import { useSettings } from '@/context/SettingsContext';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface Props {
   handleCloseCurrencyPicker: () => void;
@@ -25,7 +24,6 @@ export default function CurrencyBottomSheet({
   const [mounted, setMounted] = useState<boolean>(false);
 
   const { theme } = useSettings();
-
   const colors = useThemeColors();
 
   const closeBtnIcon =

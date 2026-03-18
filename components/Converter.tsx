@@ -3,9 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import ConverterSection from './ConverterSection';
 import SwitchBtn from './SwitchBtn';
 
-import { useThemeColors } from '@/hooks/useThemeColors';
-
 import { useCurrency } from '@/context/CurrencyContext';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface Props {
   handleOpenCurrencyPicker: (type: 'base' | 'target') => void;
@@ -13,7 +12,6 @@ interface Props {
 
 export default function Converter({ handleOpenCurrencyPicker }: Props) {
   const { baseCurrency, setBaseCurrency, targetCurrency } = useCurrency();
-
   const colors = useThemeColors();
 
   const handleChange = (text: string) => {
